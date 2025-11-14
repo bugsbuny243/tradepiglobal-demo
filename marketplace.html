@@ -2,254 +2,705 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TradePi Global – Demo Marketplace</title>
+  <title>TradePi Demo Marketplace</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    :root{
-      --bg:#020617;
-      --border:#111827;
-      --accent:#6366f1;
-      --accent-soft:rgba(99,102,241,.12);
-      --text-main:#e5e7eb;
-      --text-muted:#9ca3af;
-      --success:#22c55e;
-    }
-    *{box-sizing:border-box;}
-    body{
-      margin:0;
-      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-      background:radial-gradient(circle at top left,#111827,#020617 55%);
-      color:var(--text-main);
-    }
-    a{color:inherit;text-decoration:none;}
-
-    .shell{min-height:100vh;display:flex;flex-direction:column;}
-    header{
-      border-bottom:1px solid var(--border);
-      background:rgba(2,6,23,.96);
-      backdrop-filter:blur(10px);
-      position:sticky;top:0;z-index:10;
-    }
-    .nav{
-      max-width:1120px;margin:0 auto;padding:12px 16px;
-      display:flex;align-items:center;justify-content:space-between;font-size:14px;
-    }
-    .logo{display:flex;align-items:center;gap:8px;font-weight:600;}
-    .logo-mark{width:22px;height:22px;border-radius:999px;background:radial-gradient(circle at 30% 20%,#facc15,#f97316 40%,#4f46e5);}
-    .tag{font-size:11px;padding:2px 7px;border-radius:999px;background:rgba(148,163,184,.18);color:var(--text-muted);}
-    .btn-back{font-size:13px;padding:7px 11px;border-radius:999px;border:1px solid #1f2937;background:rgba(15,23,42,.9);color:var(--text-muted);cursor:pointer;}
-    .btn-back:hover{border-color:#4b5563;color:#e5e7eb;}
-
-    main{flex:1;max-width:1120px;margin:0 auto;padding:22px 16px 32px;}
-    h1{margin:0;font-size:22px;}
-    .sub{font-size:13px;color:var(--text-muted);max-width:560px;margin-top:6px;}
-
-    .search-row{
-      margin-top:16px;
-      display:flex;flex-wrap:wrap;gap:10px;align-items:center;
-    }
-    .search-input{
-      flex:1 1 220px;
-      display:flex;align-items:center;gap:6px;
-      background:rgba(15,23,42,.95);
-      border-radius:999px;
-      border:1px solid #1f2937;
-      padding:7px 10px;
-      font-size:13px;color:var(--text-muted);
-    }
-    .search-input input{
-      border:none;background:transparent;color:var(--text-main);
-      font-size:13px;flex:1;font-family:inherit;
-    }
-    .search-input input:focus{outline:none;}
-
-    .chip-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;font-size:11px;}
-    .chip{
-      padding:4px 8px;border-radius:999px;
-      border:1px solid #1f2937;background:rgba(15,23,42,.95);
-      color:var(--text-muted);cursor:pointer;
-    }
-    .chip-primary{
-      border-color:rgba(99,102,241,.7);
-      background:var(--accent-soft);color:#c7d2fe;
+    :root {
+      --bg: #050814;
+      --card-bg: #0b1020;
+      --accent: #4cc9f0;
+      --accent-soft: rgba(76, 201, 240, 0.16);
+      --accent-strong: #00f5d4;
+      --text-main: #e9ecff;
+      --text-muted: #8b92b7;
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --chip-bg: #111629;
+      --danger: #ff6b81;
     }
 
-    .grid{
-      margin-top:18px;
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:14px;
-    }
-    @media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
-    @media(max-width:640px){.grid{grid-template-columns:minmax(0,1fr);}}
-
-    .card{
-      background:rgba(15,23,42,.94);
-      border-radius:14px;
-      border:1px solid var(--border);
-      padding:12px 12px 14px;
-      font-size:13px;
-      display:flex;
-      flex-direction:column;
-      gap:6px;
-    }
-    .card-title{font-size:14px;font-weight:600;}
-    .meta{font-size:11px;color:var(--text-muted);}
-    .price{font-size:13px;font-weight:600;margin-top:4px;}
-    .label{display:inline-block;font-size:10px;padding:2px 6px;border-radius:999px;border:1px solid rgba(148,163,184,.6);color:var(--text-muted);}
-    .pi-pill{
-      display:inline-flex;align-items:center;gap:5px;
-      font-size:11px;padding:3px 7px;border-radius:999px;
-      border:1px solid rgba(34,197,94,.4);
-      background:rgba(22,163,74,.06);color:#bbf7d0;margin-top:4px;
-    }
-    .pi-dot{width:7px;height:7px;border-radius:999px;background:var(--success);box-shadow:0 0 0 3px rgba(34,197,94,.25);}
-
-    .btn-row{margin-top:6px;display:flex;justify-content:space-between;gap:8px;font-size:12px;}
-    .btn-small{
-      flex:1;
-      padding:6px 8px;border-radius:999px;border:1px solid #1f2937;
-      background:rgba(15,23,42,.95);color:var(--text-muted);text-align:center;cursor:pointer;
-    }
-    .btn-small.primary{
-      border-color:rgba(99,102,241,.7);
-      background:rgba(30,64,175,.55);
-      color:#e5e7eb;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    footer{
-      border-top:1px solid #020617;
-      font-size:11px;color:var(--text-muted);
-      text-align:center;padding:10px 16px 14px;
-      background:rgba(2,6,23,.96);
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      background: radial-gradient(circle at top, #151b3f 0%, #050814 55%, #020308 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+    }
+
+    .shell {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 20px 16px 56px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      gap: 12px;
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: radial-gradient(circle at 20% 0, #f9c74f 0%, #f3722c 45%, #ef476f 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #0b0615;
+      font-size: 19px;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.18), 0 18px 35px rgba(0, 0, 0, 0.6);
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand span:first-child {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(4, 10, 40, 0.9);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .pill {
+      padding: 6px 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    main {
+      background: radial-gradient(circle at top left, rgba(76, 201, 240, 0.14), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(131, 56, 236, 0.22), transparent 55%),
+                  var(--bg);
+      border-radius: 22px;
+      padding: 22px 16px 20px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow:
+        0 32px 60px rgba(0, 0, 0, 0.85),
+        0 0 0 1px rgba(255, 255, 255, 0.02);
+    }
+
+    .title-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 20px;
+      letter-spacing: 0.02em;
+    }
+
+    .sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      max-width: 520px;
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+
+    .search-row {
+      margin-bottom: 14px;
+    }
+
+    .search-input {
+      border-radius: 999px;
+      background: rgba(3, 8, 30, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 8px 11px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .search-input input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text-main);
+      font-size: 13px;
+    }
+
+    .search-input input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .search-input span {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .search-input span strong {
+      color: var(--accent-strong);
+      font-weight: 600;
+    }
+
+    .hint {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .chip {
+      font-size: 11px;
+      padding: 5px 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(6, 12, 40, 0.9);
+      color: var(--text-muted);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .chip-primary {
+      background: linear-gradient(135deg, #4cc9f0, #4361ee);
+      border-color: transparent;
+      color: #040618;
+      font-weight: 600;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.16), 0 0 30px rgba(76, 201, 240, 0.55);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 10px;
+    }
+
+    @media (min-width: 640px) {
+      .grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .card {
+      background: rgba(6, 10, 32, 0.96);
+      border-radius: 16px;
+      padding: 12px 11px 10px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 18px 35px rgba(0, 0, 0, 0.8);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: transform 0.12s ease-out, box-shadow 0.12s ease-out,
+                  border-color 0.12s ease-out, background 0.12s ease-out;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(76, 201, 240, 0.65);
+      box-shadow: 0 22px 45px rgba(0, 0, 0, 0.95);
+      background: radial-gradient(circle at top left, rgba(76, 201, 240, 0.16), transparent 60%),
+                  rgba(6, 10, 32, 0.98);
+    }
+
+    .label {
+      font-size: 11px;
+      color: var(--accent-strong);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .meta {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .price {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .pi-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(76, 201, 240, 0.4);
+      font-size: 10px;
+      color: var(--accent-strong);
+      margin-top: 2px;
+    }
+
+    .pi-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent-strong);
+      box-shadow: 0 0 8px rgba(0, 245, 212, 0.9);
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .btn-small {
+      flex: 1;
+      border-radius: 999px;
+      padding: 5px 2px;
+      font-size: 11px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .btn-small.primary {
+      background: linear-gradient(135deg, #4cc9f0, #4361ee);
+      color: #040618;
+      border-color: transparent;
+      font-weight: 600;
+    }
+
+    .btn-small.ghost {
+      background: rgba(8, 14, 40, 0.8);
+      color: var(--text-muted);
+    }
+
+    footer {
+      margin-top: 18px;
+      font-size: 10px;
+      color: var(--text-muted);
+      text-align: center;
     }
   </style>
 </head>
 <body>
-<div class="shell">
-  <header>
-    <div class="nav">
-      <div class="logo">
-        <div class="logo-mark"></div>
-        <div>TradePi Global</div>
-        <span class="tag">Demo Marketplace</span>
+  <div class="shell">
+    <header>
+      <div class="logo-wrap">
+        <div class="logo">π</div>
+        <div class="brand">
+          <span>TradePi Global</span>
+          <span class="badge">Demo Marketplace · Testnet</span>
+        </div>
       </div>
-      <a href="index.html" class="btn-back">← Ana sayfaya dön</a>
-    </div>
-  </header>
+      <div class="pill">Pi-powered B2B · Demo</div>
+    </header>
 
-  <main>
-    <h1>TradePi Demo Marketplace</h1>
-    <p class="sub">
-      Bu ekran, üreticilerin listelediği ürünlerin kurumsal alıcılara nasıl
-      görüneceğine dair demo bir vitrindir. Fiyatlar ve ürünler temsilidir;
-      gerçek ticari teklif değildir.
-    </p>
-
-    <div class="search-row">
-      <div class="search-input">
-        🔍
-        <input placeholder="Ürün, kategori veya ülke ara (demo)" />
+    <main>
+      <div class="title-row">
+        <h1>TradePi Demo Marketplace</h1>
       </div>
-      <div style="font-size:11px;color:var(--text-muted);">
-        Filtreler sadece tasarım amaçlıdır, arama işlevi simülatiftir.
+      <p class="sub">
+        Bu ekran, üreticilerin listelediği ürünlerin kurumsal alıcılara nasıl görüneceğine dair demo bir vitrindir.
+        Fiyatlar ve ürünler temsili olup, gerçek ticari teklif değildir.
+      </p>
+
+      <div class="search-row">
+        <div class="search-input">
+          <span>🔍</span>
+          <input id="searchBox" placeholder="Ürün, kategori veya ülke ara..." />
+        </div>
+        <p class="hint">Filtreler sadece tasarım amaçlıdır, arama işlevi örnek olarak simüle edilir.</p>
       </div>
-    </div>
 
-   <div class="chip-row">
-  <div class="chip chip-primary" data-filter="all">Tümü</div>
-  <div class="chip" data-filter="food">Gıda & Tarım</div>
-  <div class="chip" data-filter="textile">Tekstil</div>
-  <div class="chip" data-filter="industrial">Sanayi Ürünleri</div>
-  <div class="chip" data-filter="logistics">Soğuk Zincir</div>
-  <div class="chip" data-filter="pi">Pi ile Ödeme Uygun</div>
-   </div>
+      <div class="chip-row">
+        <div class="chip chip-primary" data-filter="all">Tümü</div>
+        <div class="chip" data-filter="food">Gıda &amp; Tarım</div>
+        <div class="chip" data-filter="textile">Tekstil</div>
+        <div class="chip" data-filter="industrial">Sanayi Ürünleri</div>
+        <div class="chip" data-filter="logistics">Soğuk Zincir</div>
+        <div class="chip" data-filter="pi">Pi ile Ödeme Uygun</div>
+      </div>
 
-    <section class="grid">
-      <article class="card">
-        <div class="label">Gıda &amp; Tarım</div>
-        <div class="card-title">Organik Zeytinyağı 5L (Özel Marka)</div>
-        <div class="meta">Menşei: Türkiye · Teslim: FOB / CIF</div>
-        <div class="price">12.50 USD / adet · Min. 240 adet</div>
-        <div class="pi-pill">
-          <span class="pi-dot"></span>
-          Pi ile kısmi ödeme pilotu (demo)
-        </div>
-        <div class="btn-row">
-          <div class="btn-small primary">Teklif Talep Et</div>
-          <div class="btn-small">Detay (statik)</div>
-        </div>
-      </article>
+      <section class="grid" id="productGrid">
+        <!-- GIDA & TARIM -->
+        <article class="card" data-category="food" data-tags="pi turkiye">
+          <div class="label">Gıda &amp; Tarım</div>
+          <div class="card-title">Organik Zeytinyağı 5L (Özel Marka)</div>
+          <div class="meta">
+            Menşe: Türkiye · Teslim: FOB / EXW<br />
+            Min. sipariş: 240 adet
+          </div>
+          <div class="price">12.50 USD / adet · Min. 240 adet</div>
+          <div class="pi-pill">
+            <span class="pi-dot"></span>
+            Pi ile kısmi ödeme pilotu (demo)
+          </div>
+          <div class="btn-row">
+            <div class="btn-small primary">Teklif Talep Et</div>
+            <div class="btn-small ghost">Detay (statik)</div>
+          </div>
+        </article>
 
-      <article class="card">
-        <div class="label">Soğuk Zincir</div>
-        <div class="card-title">Dondurulmuş Sebze Karışımı</div>
-        <div class="meta">Menşei: Doğu Avrupa · -18°C soğuk zincir</div>
-        <div class="price">1.950 USD / ton · Min. 1 konteyner</div>
-        <div class="pi-pill">
-          <span class="pi-dot"></span>
-          Pi ile depozito senaryosu (ödeme simülasyonu)
-        </div>
-        <div class="btn-row">
-          <div class="btn-small primary">Toplu Alım Talebi</div>
-          <div class="btn-small">Üretici Profili</div>
-        </div>
-      </article>
+        <article class="card" data-category="food" data-tags="kampanya pi">
+          <div class="label">Gıda &amp; Tarım</div>
+          <div class="card-title">Organik Kuruyemiş Karışımı</div>
+          <div class="meta">
+            Menşe: Türkiye · Özel marka ambalaj<br />
+            Min. sipariş: 50.000 paket
+          </div>
+          <div class="price">2.40 USD / paket · Min. 50.000 paket</div>
+          <div class="pi-pill">
+            <span class="pi-dot"></span>
+            Pi ile promosyon kampanyası (kurgu)
+          </div>
+          <div class="btn-row">
+            <div class="btn-small primary">Teklif Karşılaştır</div>
+            <div class="btn-small ghost">Alıcı Paneline Gönder</div>
+          </div>
+        </article>
 
-      <article class="card">
-        <div class="label">Tekstil</div>
-        <div class="card-title">Pamuklu T-Shirt (OEM Üretim)</div>
-        <div class="meta">Menşei: Türkiye · Gramaj ve renk opsiyonlu</div>
-        <div class="price">3.10 USD / adet · Min. 1.000 adet</div>
-        <div class="btn-row">
-          <div class="btn-small primary">Numune Talep Et</div>
-          <div class="btn-small">Sözleşme Taslağı</div>
-        </div>
-      </article>
+        <!-- TEKSTİL -->
+        <article class="card" data-category="textile" data-tags="oem">
+          <div class="label">Tekstil</div>
+          <div class="card-title">Pamuklu T-Shirt (OEM Üretim)</div>
+          <div class="meta">
+            Menşe: Türkiye · Özel marka baskı opsiyonu<br />
+            Min. sipariş: 1.000 adet
+          </div>
+          <div class="price">3.10 USD / adet · Min. 1.000 adet</div>
+          <div class="btn-row">
+            <div class="btn-small primary">Numune Talep Et</div>
+            <div class="btn-small ghost">Sözleşme Taslağı</div>
+          </div>
+        </article>
 
-      <article class="card">
-        <div class="label">Gıda &amp; Atıştırmalık</div>
-        <div class="card-title">Organik Kuruyemiş Karışımı</div>
-        <div class="meta">Menşei: Türkiye · Özel marka ambalaj</div>
-        <div class="price">2.40 USD / paket · Min. 50.000 paket</div>
-        <div class="pi-pill">
-          <span class="pi-dot"></span>
-          Pi ile promosyon kampanyası (kurgu)
-        </div>
-        <div class="btn-row">
-          <div class="btn-small primary">Teklif Karşılaştır</div>
-          <div class="btn-small">Alıcı Paneline Gönder</div>
-        </div>
-      </article>
+        <!-- SANAYİ -->
+        <article class="card" data-category="industrial" data-tags="endustri">
+          <div class="label">Sanayi Ürünleri</div>
+          <div class="card-title">Endüstriyel Temizlik Konsantresi</div>
+          <div class="meta">
+            Menşe: Türkiye · ISO sertifikalı üretim<br />
+            Min. sipariş: 5.000 L
+          </div>
+          <div class="price">1.35 USD / L · Min. 5.000 L</div>
+          <div class="btn-row">
+            <div class="btn-small primary">Teklif Talep Et</div>
+            <div class="btn-small ghost">SDS / Belgeler</div>
+          </div>
+        </article>
 
-      <article class="card">
-        <div class="label">Sanayi · Kimya</div>
-        <div class="card-title">Endüstriyel Temizlik Konsantresi</div>
-        <div class="meta">Menşei: Türkiye · ISO sertifikalı üretim</div>
-        <div class="price">1.35 USD / L · Min. 5.000 L</div>
-        <div class="btn-row">
-          <div class="btn-small primary">Teklif Talep Et</div>
-          <div class="btn-small">SDS / Belgeler</div>
-        </div>
-      </article>
+        <!-- LOJİSTİK / SOĞUK ZİNCİR -->
+        <article class="card" data-category="logistics" data-tags="soguk zincir">
+          <div class="label">Soğuk Zincir Lojistik</div>
+          <div class="card-title">Soğuk Zincir Lojistik Hizmeti</div>
+          <div class="meta">
+            Bölge: Avrupa &amp; MENA · Multimodal taşımacılık<br />
+            Hizmet: Depo &amp; taşıma entegrasyonu
+          </div>
+          <div class="price">Talep bazlı fiyatlandırma</div>
+          <div class="btn-row">
+            <div class="btn-small primary">Taşıma Teklifi Al</div>
+            <div class="btn-small ghost">Alıcı Paneli ile Bağla</div>
+          </div>
+        </article>
 
-      <article class="card">
-        <div class="label">Lojistik · Hizmet</div>
-        <div class="card-title">Soğuk Zincir Lojistik Hizmeti</div>
-        <div class="meta">Bölge: Avrupa &amp; MENA · Multimodal taşımacılık</div>
-        <div class="price">Talep bazlı fiyatlandırma</div>
-        <div class="btn-row">
-          <div class="btn-small primary">Taşıma Teklifi Al</div>
-          <div class="btn-small">Alıcı Paneli ile Bağla</div>
-        </div>
-      </article>
-    </section>
-  </main>
+        <article class="card" data-category="logistics" data-tags="pi">
+          <div class="label">Soğuk Zincir Lojistik</div>
+          <div class="card-title">Pi ile Depozito Ödeme Simülasyonu</div>
+          <div class="meta">
+            Taşıma ön rezervasyonu için Pi ile depozito ödemesinin demo simülasyonu.
+            Gerçek sistemde akıllı sözleşme entegrasyonu planlanmaktadır.
+          </div>
+          <div class="price">Pi ile depozito ödemesi (demo)</div>
+          <div class="pi-pill">
+            <span class="pi-dot"></span>
+            Pi ile ödeme senaryosu (kurgu)
+          </div>
+          <div class="btn-row">
+            <div class="btn-small primary">Toplu Alım Talebi</div>
+            <div class="btn-small ghost">Proje Ücreti</div>
+          </div>
+        </article>
+      </section>
+    </main>
 
-  <footer>
-    TradePi Global · Demo marketplace ekranıdır. Tüm ürün ve fiyatlar kurgusaldır
-    ve yalnızca proje tanıtımı / hibe başvurusu amaçlıdır.
-  </footer>
-</div>
+    <footer>
+      Bu sayfa, sadece tasarım amaçlı bir demo olup, TradePi Global projesinin
+      olası B2B iş akışını simüle eder.
+    </footer>
+  </div>
+
+  <script>
+    // CHIP FİLTRELEME
+    const chips = document.querySelectorAll('.chip');
+    const cards = document.querySelectorAll('.card');
+
+    chips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        chips.forEach((c) => c.classList.remove('chip-primary'));
+        chip.classList.add('chip-primary');
+
+        const filter = chip.getAttribute('data-filter');
+
+        cards.forEach((card) => {
+          card.style.display = "block";
+
+          if (filter !== "all") {
+            const category = card.getAttribute('data-category');
+            const tags = card.getAttribute('data-tags') || "";
+
+            const matchesCategory = category === filter;
+            const matchesTag = tags.includes(filter);
+
+            if (!matchesCategory && !matchesTag) {
+              card.style.display = "none";
+            }
+          }
+        });
+      });
+    });
+
+    // BASİT ARAMA (başlığa göre)
+    const searchBox = document.getElementById('searchBox');
+    if (searchBox) {
+      searchBox.addEventListener('input', () => {
+        const term = searchBox.value.toLowerCase();
+
+        cards.forEach((card) => {
+          const title = card.querySelector('.card-title')?.textContent.toLowerCase() || "";
+          if (!term || title.includes(term)) {
+            card.style.opacity = "1";
+          } else {
+            card.style.opacity = "0.25";
+          }
+        });
+      });
+    }
+  </script>
 </body>
-</html>
+            </html><!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>TradePi Demo Marketplace</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #050814;
+      --card-bg: #0b1020;
+      --accent: #4cc9f0;
+      --accent-soft: rgba(76, 201, 240, 0.16);
+      --accent-strong: #00f5d4;
+      --text-main: #e9ecff;
+      --text-muted: #8b92b7;
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --chip-bg: #111629;
+      --danger: #ff6b81;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      background: radial-gradient(circle at top, #151b3f 0%, #050814 55%, #020308 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+    }
+
+    .shell {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 20px 16px 56px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      gap: 12px;
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: radial-gradient(circle at 20% 0, #f9c74f 0%, #f3722c 45%, #ef476f 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #0b0615;
+      font-size: 19px;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.18), 0 18px 35px rgba(0, 0, 0, 0.6);
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand span:first-child {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(4, 10, 40, 0.9);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .pill {
+      padding: 6px 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    main {
+      background: radial-gradient(circle at top left, rgba(76, 201, 240, 0.14), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(131, 56, 236, 0.22), transparent 55%),
+                  var(--bg);
+      border-radius: 22px;
+      padding: 22px 16px 20px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow:
+        0 32px 60px rgba(0, 0, 0, 0.85),
+        0 0 0 1px rgba(255, 255, 255, 0.02);
+    }
+
+    .title-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 20px;
+      letter-spacing: 0.02em;
+    }
+
+    .sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      max-width: 520px;
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+
+    .search-row {
+      margin-bottom: 14px;
+    }
+
+    .search-input {
+      border-radius: 999px;
+      background: rgba(3, 8, 30, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 8px 11px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .search-input input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text-main);
+      font-size: 13px;
+    }
+
+    .search-input input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .search-input span {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .search-input span strong {
+      color: var(--accent-strong);
+      font-weight: 600;
+    }
+
+    .hint {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .chip {
+      font-size: 11px;
+      padding: 5px 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(6, 12, 40, 0.9);
+      color: var(--text-muted);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .chip-primary {
+      background: linear-gradient(135deg, #4cc
+        
