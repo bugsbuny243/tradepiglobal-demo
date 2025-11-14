@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TradePi Marketplace</title>
+    <style>
+        body { margin:0; font-family:system-ui; background:#0d1117; color:#fff; }
+        header { padding:16px; background:#161b22; display:flex; justify-content:space-between; }
+        .grid { 
+            margin:20px auto; 
+            max-width: 1100px; 
+            display:grid; 
+            grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); 
+            gap:20px; 
+        }
+        .card {
+            background:#1c2128; 
+            padding:16px; 
+            border-radius:10px; 
+            border:1px solid #30363d;
+        }
+        .btn { 
+            padding:10px 16px; 
+            border-radius:6px; 
+            border:none; 
+            cursor:pointer;
+            font-weight:600;
+        }
+        .primary { background:#6366f1; color:#fff; }
+    </style>
+</head>
+<body>
+<header>
+    <h2>TradePi Marketplace</h2>
+    <a href="/" style="color:#9ca3af;">Ana Sayfa</a>
+</header>
+
+<main>
+    <h2 style="text-align:center; margin-top:20px;">Demo Ürünler</h2>
+
+    <div class="grid">
+        <div class="card">
+            <h3>Organik Bal - 1 KG</h3>
+            <p>Üretici: Erzincan</p>
+            <p><strong>Fiyat: 12 Pi</strong></p>
+            <button class="btn primary">Teklif Ver</button>
+        </div>
+
+        <div class="card">
+            <h3>Soğuk Sıkım Zeytinyağı</h3>
+            <p>Üretici: Ayvalık</p>
+            <p><strong>Fiyat: 20 Pi</strong></p>
+            <button class="btn primary">Teklif Ver</button>
+        </div>
+
+        <div class="card">
+            <h3>Kuru Kayısı</h3>
+            <p>Üretici: Malatya</p>
+            <p><strong>Fiyat: 8 Pi</strong></p>
+            <button class="btn primary">Teklif Ver</button>
+        </div>
+    </div>
+</main>
+</body>
+</html>
