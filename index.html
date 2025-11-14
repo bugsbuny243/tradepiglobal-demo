@@ -1,111 +1,349 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TradePi Global – Pi Network B2B Marketplace</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TradePi Global – Pi Network B2B Marketplace</title>
+  <style>
+    :root {
+      --bg: #020617;
+      --panel: #020617;
+      --card: #020617;
+      --border: #1f2933;
+      --accent: #6366f1;
+      --accent-soft: rgba(99,102,241,0.14);
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --success: #22c55e;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #111827, #020617 55%);
+      color: var(--text-main);
+    }
+    a { color: inherit; text-decoration: none; }
 
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background: #0d1117;
-            color: #e6edf3;
-        }
+    /* layout */
+    .shell {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      border-bottom: 1px solid #111827;
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(2,6,23,0.96);
+    }
+    .nav {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      letter-spacing: .02em;
+    }
+    .logo-mark {
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #facc15, #f97316 40%, #4f46e5);
+    }
+    .tag {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(148,163,184,.18);
+      color: var(--text-muted);
+    }
 
-        header {
-            padding: 20px;
-            text-align: center;
-            font-size: 26px;
-            font-weight: bold;
-            color: #58a6ff;
-        }
+    main {
+      flex: 1;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 26px 16px 40px;
+    }
 
-        .hero {
-            text-align: center;
-            padding: 50px 20px;
-        }
+    /* hero */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.6fr);
+      gap: 26px;
+      align-items: center;
+    }
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: minmax(0, 1fr); }
+    }
 
-        .hero h1 {
-            font-size: 30px;
-            margin-bottom: 10px;
-        }
+    .hero-title {
+      font-size: clamp(24px, 4vw, 32px);
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+    .hero-sub {
+      font-size: 15px;
+      color: var(--text-muted);
+      max-width: 460px;
+    }
+    .pi-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 9px;
+      margin-bottom: 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      font-size: 11px;
+      color: #c7d2fe;
+      border: 1px solid rgba(129,140,248,.4);
+    }
+    .pi-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34,197,94,.25);
+    }
 
-        .hero p {
-            font-size: 17px;
-            opacity: 0.8;
-            max-width: 500px;
-            margin: auto;
-        }
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 18px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: background .18s, transform .14s, box-shadow .18s, border .18s;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #4f46e5, #22c55e);
+      border-color: rgba(148,163,184,.4);
+      box-shadow: 0 18px 40px rgba(15,23,42,.95);
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 50px rgba(15,23,42,1);
+    }
+    .btn-outline {
+      background: rgba(15,23,42,.7);
+      border-color: #334155;
+      color: var(--text-muted);
+    }
+    .btn-outline:hover {
+      border-color: #6366f1;
+      color: #e5e7eb;
+      background: rgba(30,64,175,.38);
+    }
+    .btn-ghost {
+      border-color: transparent;
+      background: transparent;
+      color: var(--text-muted);
+      font-weight: 500;
+      padding-inline: 10px;
+    }
+    .btn-ghost span {
+      border-bottom: 1px dashed rgba(148,163,184,.6);
+    }
 
-        .btn-row {
-            margin-top: 30px;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
+    .hero-img-card {
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: radial-gradient(circle at top, rgba(148,163,253,.17), #020617 52%);
+      padding: 14px 14px 16px;
+      box-shadow: 0 18px 45px rgba(15,23,42,.95);
+    }
+    .hero-stat {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+      font-size: 11px;
+    }
+    .pill {
+      padding: 4px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,.3);
+      background: rgba(15,23,42,.85);
+    }
 
-        .btn {
-            padding: 12px 22px;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            transition: 0.2s;
-        }
+    /* features */
+    .section-label {
+      margin-top: 34px;
+      font-size: 12px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: #64748b;
+    }
+    .features {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+    @media (max-width: 768px) {
+      .features { grid-template-columns: minmax(0, 1fr); }
+    }
+    .card {
+      background: rgba(15,23,42,.92);
+      border-radius: 14px;
+      border: 1px solid #111827;
+      padding: 14px 14px 18px;
+      font-size: 13px;
+    }
+    .card h3 {
+      font-size: 14px;
+      margin: 2px 0 6px;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,.5);
+      color: #9ca3af;
+    }
 
-        .btn-primary {
-            background: #238636;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #2ea043;
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 2px solid #58a6ff;
-            color: #58a6ff;
-        }
-
-        .btn-outline:hover {
-            background: #58a6ff;
-            color: #0d1117;
-        }
-
-        footer {
-            margin-top: 40px;
-            padding: 20px;
-            text-align: center;
-            font-size: 13px;
-            opacity: 0.6;
-        }
-    </style>
+    footer {
+      border-top: 1px solid #020617;
+      font-size: 12px;
+      color: var(--text-muted);
+      text-align: center;
+      padding: 14px 16px 18px;
+      background: rgba(2,6,23,.96);
+    }
+  </style>
 </head>
-
 <body>
+<div class="shell">
 
-<header>TradePi Global – Demo</header>
-
-<section class="hero">
-    <h1>Üretici ile Alıcıyı Pi Network Destekli B2B Pazarda Buluşturuyoruz</h1>
-    <p>
-        TradePi Global, dünya genelindeki üreticileri ve alıcıları bir araya getiren
-        Pi Network destekli akıllı bir B2B ticaret platformudur.
-    </p>
-
-    <div class="btn-row">
-        <button class="btn btn-primary">Üretici Girişi</button>
-        <button class="btn btn-outline">Alıcı Girişi</button>
+  <header>
+    <div class="nav">
+      <div class="logo">
+        <div class="logo-mark"></div>
+        <div>TradePi Global</div>
+        <span class="tag">Pi-powered B2B • Demo</span>
+      </div>
+      <div style="font-size:12px; color:#9ca3af;">
+        v0.1 · Test Ortamı
+      </div>
     </div>
-</section>
+  </header>
 
-<footer>
-    © 2025 TradePi Global – Tüm Hakları Saklıdır.
-</footer>
+  <main>
+    <section class="hero">
+      <!-- left -->
+      <div>
+        <div class="pi-chip">
+          <div class="pi-dot"></div>
+          Pi Network &amp; OpenMind tabanlı akıllı ticaret
+        </div>
 
+        <h1 class="hero-title">
+          Üretici ile Alıcıyı Pi Network Destekli
+          <span style="color:#a5b4fc;"> Akıllı B2B Pazarda</span> buluşturuyoruz.
+        </h1>
+
+        <p class="hero-sub">
+          TradePi Global, dünya genelindeki üreticiler ile toptan alıcıları
+          bir araya getiren, Pi ile tahsilat ve yapay zekâ ile eşleşme
+          mantığına hazırlanan bir B2B e-ticaret altyapısıdır.
+        </p>
+
+        <div class="btn-row">
+          <a href="producer.html" class="btn btn-primary">Üretici Girişi</a>
+          <a href="buyer.html" class="btn btn-outline">Alıcı Girişi</a>
+          <a href="marketplace.html" class="btn btn-ghost"><span>Demo Marketplace’i Gör</span></a>
+        </div>
+      </div>
+
+      <!-- right -->
+      <aside class="hero-img-card">
+        <div class="hero-stat">
+          <span style="font-weight:500; color:#e5e7eb;">TradePi Gösterge Paneli</span>
+          <span>Demo Ortamı</span>
+        </div>
+
+        <div style="margin-top:6px; font-size:12px; color:#9ca3af;">
+          Canlıya geçişte hedef:
+        </div>
+        <ul style="margin:6px 0 0; padding-left:16px; font-size:12px; color:#cbd5f5;">
+          <li>Pi ile hızlı ve masrafsız tahsilat</li>
+          <li>OpenMind destekli akıllı eşleşme motoru</li>
+          <li>Devlet hibe ve teşvikleri ile ölçeklenebilir altyapı</li>
+        </ul>
+
+        <div class="pill-row">
+          <div class="pill">B2B Üretici Paneli</div>
+          <div class="pill">Toplu Alım Talepleri</div>
+          <div class="pill">Pi Network Ödeme Simülasyonu</div>
+          <div class="pill">Hibe / Teşvik Proje Demosu</div>
+        </div>
+      </aside>
+    </section>
+
+    <div class="section-label">Platform Katmanları</div>
+    <section class="features">
+      <article class="card">
+        <span class="badge">Üretici Katmanı</span>
+        <h3>Doğrudan Üreticiden Teklif</h3>
+        <p>
+          Üreticiler ürünlerini TradePi üzerinden listeleyerek dünya
+          pazarındaki kurumsal alıcılara Pi ile veya yerel para birimiyle
+          teklif verebilir.
+        </p>
+      </article>
+
+      <article class="card">
+        <span class="badge">Alıcı Katmanı</span>
+        <h3>Akıllı Eşleşme &amp; Toplu Talep</h3>
+        <p>
+          Toptancılar, ithalatçılar ve zincir marketler; ihtiyaçlarını tek
+          formda bildirerek onlarca üreticiyle aynı anda eşleşir.
+        </p>
+      </article>
+
+      <article class="card">
+        <span class="badge">Altyapı</span>
+        <h3>Pi Network &amp; OpenMind Entegrasyonu</h3>
+        <p>
+          Pi cüzdanı ile ödeme onayı, OpenMind robot OS ile depo ve lojistik
+          otomasyonuna ilerleyen, geleceğe dönük bir Ar-Ge yol haritası.
+        </p>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 TradePi Global · Bu site demo amaçlıdır ve hibe/teşvik
+    başvuruları için teknik ön gösterim niteliği taşır.
+  </footer>
+</div>
 </body>
 </html>
