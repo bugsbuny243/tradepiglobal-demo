@@ -1,21 +1,337 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alıcı Paneli</title>
-<style>
-body { background:#0d1117; color:#fff; font-family:system-ui; }
-.container { width:90%; max-width:500px; margin:40px auto; }
-.input { width:100%; padding:10px; margin-top:10px; border-radius:6px; border:none; }
-.btn { width:100%; padding:12px; margin-top:15px; background:#10b981; border:none; color:#fff; border-radius:6px; }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TradePi Global – Üretici Paneli</title>
+  <style>
+    :root {
+      --bg: #020617;
+      --border: #111827;
+      --accent: #6366f1;
+      --accent-soft: rgba(99,102,241,0.12);
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --success: #22c55e;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #111827, #020617 55%);
+      color: var(--text-main);
+    }
+    a { color: inherit; text-decoration: none; }
+
+    .shell { min-height: 100vh; display:flex; flex-direction:column; }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(2,6,23,.96);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .nav {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 12px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      font-size:14px;
+    }
+    .logo {
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-weight:600;
+    }
+    .logo-mark {
+      width:22px;height:22px;
+      border-radius:999px;
+      background:radial-gradient(circle at 30% 20%, #facc15, #f97316 40%, #4f46e5);
+    }
+    .tag { font-size:11px;padding:2px 7px;border-radius:999px;background:rgba(148,163,184,.18);color:var(--text-muted); }
+
+    main {
+      flex:1;
+      max-width:1120px;
+      margin:0 auto;
+      padding:22px 16px 32px;
+    }
+
+    .title-row {
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content:space-between;
+      align-items:flex-end;
+      margin-bottom:18px;
+    }
+    .title-row h1 {
+      margin:0;
+      font-size:22px;
+    }
+    .sub { font-size:13px;color:var(--text-muted);max-width:520px; }
+
+    .btn-back {
+      font-size:13px;
+      padding:7px 11px;
+      border-radius:999px;
+      border:1px solid #1f2937;
+      background:rgba(15,23,42,.9);
+      color:var(--text-muted);
+      cursor:pointer;
+    }
+    .btn-back:hover { border-color:#4b5563;color:#e5e7eb; }
+
+    .grid {
+      display:grid;
+      grid-template-columns: minmax(0,1.4fr) minmax(0,1fr);
+      gap:16px;
+    }
+    @media (max-width:768px){ .grid{grid-template-columns: minmax(0,1fr);} }
+
+    .card {
+      background:rgba(15,23,42,.94);
+      border-radius:14px;
+      border:1px solid var(--border);
+      padding:14px 14px 16px;
+      font-size:13px;
+    }
+    .card h2 {
+      margin:0 0 6px;
+      font-size:15px;
+    }
+    .badge {
+      display:inline-block;
+      font-size:10px;
+      padding:2px 6px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,.6);
+      color:var(--text-muted);
+      margin-bottom:6px;
+    }
+
+    .form-group { margin-top:8px;display:flex;flex-direction:column;gap:5px; }
+    label { font-size:12px;color:var(--text-muted); }
+    input, textarea, select {
+      background:#020617;
+      border-radius:8px;
+      border:1px solid #1f2937;
+      padding:7px 9px;
+      color:var(--text-main);
+      font-size:13px;
+      font-family:inherit;
+    }
+    textarea { min-height:70px;resize:vertical; }
+    input:focus, textarea:focus, select:focus {
+      outline:none;
+      border-color:var(--accent);
+      box-shadow:0 0 0 1px rgba(99,102,241,.4);
+    }
+
+    .btn-primary {
+      margin-top:10px;
+      padding:9px 15px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,.5);
+      background:linear-gradient(135deg,#4f46e5,#22c55e);
+      color:white;
+      font-weight:600;
+      font-size:13px;
+      cursor:pointer;
+    }
+    .btn-primary:hover { opacity:.96; }
+
+    .stat-row {
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:8px;
+    }
+    .stat-pill {
+      flex:1 1 110px;
+      padding:8px 9px;
+      border-radius:10px;
+      background:rgba(15,23,42,.96);
+      border:1px solid #1f2937;
+      font-size:11px;
+      color:var(--text-muted);
+    }
+    .stat-pill strong { display:block;color:#e5e7eb;font-size:13px;margin-bottom:3px; }
+
+    table { width:100%;border-collapse:collapse;margin-top:10px;font-size:12px; }
+    th, td { padding:7px 6px;border-bottom:1px solid #020617;text-align:left; }
+    th { font-weight:500;color:#9ca3af;font-size:11px; }
+    tr:hover td { background:rgba(15,23,42,.9); }
+
+    .pill {
+      display:inline-flex;
+      align-items:center;
+      gap:4px;
+      font-size:11px;
+      padding:3px 7px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,.5);
+      background:rgba(15,23,42,.9);
+      color:var(--text-muted);
+      margin-top:6px;
+    }
+    .dot {
+      width:7px;height:7px;border-radius:999px;
+      background:var(--success);
+      box-shadow:0 0 0 3px rgba(34,197,94,.25);
+    }
+
+    footer {
+      border-top:1px solid #020617;
+      font-size:11px;
+      color:var(--text-muted);
+      text-align:center;
+      padding:10px 16px 14px;
+      background:rgba(2,6,23,.96);
+    }
+  </style>
 </head>
 <body>
-<div class="container">
-    <h2>Alıcı Paneli</h2>
-    <input class="input" placeholder="Aramak istediğiniz ürün">
-    <button class="btn">Ara</button>
+<div class="shell">
+  <header>
+    <div class="nav">
+      <div class="logo">
+        <div class="logo-mark"></div>
+        <div>TradePi Global</div>
+        <span class="tag">Üretici Paneli · Demo</span>
+      </div>
+      <a href="index.html" class="btn-back">← Ana sayfaya dön</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="title-row">
+      <div>
+        <h1>Üretici Kontrol Paneli</h1>
+        <p class="sub">
+          Bu ekran, hibe / teşvik başvurularında “Üretici arayüzü” olarak
+          kullanılacak demo paneldir. Gerçek canlı sistemde ürünler, stoklar
+          ve siparişler bu alandan yönetilecektir.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid">
+      <!-- Sol: Ürün ekleme -->
+      <section class="card">
+        <span class="badge">Hızlı Ürün Ekle (Demo)</span>
+        <h2>Yeni ürün kaydı</h2>
+        <p style="font-size:12px;color:var(--text-muted);margin-top:4px;">
+          Aşağıdaki form demo amaçlıdır. Gerçek sistemde veriler güvenli bir
+          veritabanına kaydedilecek ve yalnızca yetkili üretici görecektir.
+        </p>
+
+        <div class="form-group">
+          <label>Ürün adı</label>
+          <input placeholder="Örn: Organik zeytinyağı 5L bidon" />
+        </div>
+
+        <div class="form-group">
+          <label>Kategori</label>
+          <select>
+            <option>Gıda &amp; Tarım</option>
+            <option>Tekstil &amp; Hazır Giyim</option>
+            <option>Sanayi Ürünleri</option>
+            <option>Diğer</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Minimum sipariş miktarı</label>
+          <input placeholder="Örn: 200 adet, 3 palet vb." />
+        </div>
+
+        <div class="form-group">
+          <label>Birim fiyat (USD veya yerel para)</label>
+          <input placeholder="Örn: 12.50 USD / adet" />
+        </div>
+
+        <div class="form-group">
+          <label>Kısa açıklama</label>
+          <textarea placeholder="Ürününüz için kısa bir açıklama girin."></textarea>
+        </div>
+
+        <button class="btn-primary">Kaydı simüle et (demo)</button>
+
+        <div class="pill">
+          <span class="dot"></span>
+          Pi ile tahsilat: Hedef özellik – canlı sürümde aktif edilecektir.
+        </div>
+      </section>
+
+      <!-- Sağ: Özet & örnek ürünler -->
+      <aside class="card">
+        <span class="badge">Üretici Özeti</span>
+        <h2>Hızlı görünüm</h2>
+
+        <div class="stat-row">
+          <div class="stat-pill">
+            <strong>12 ürün</strong>
+            Demo üretici portföyü
+          </div>
+          <div class="stat-pill">
+            <strong>4 açık teklif</strong>
+            Alıcılardan bekleyen talepler
+          </div>
+          <div class="stat-pill">
+            <strong>Pi ile ödeme</strong>
+            Pilot aşamasında (test ağı)
+          </div>
+        </div>
+
+        <p style="font-size:12px;color:var(--text-muted);margin-top:12px;">
+          Aşağıdaki tablo sistemde kayıtlı ürünlerin örnek bir listesini temsil eder.
+          Gerçek sistemde bu liste dinamik olacaktır.
+        </p>
+
+        <table>
+          <thead>
+          <tr>
+            <th>Ürün</th>
+            <th>Min. Sipariş</th>
+            <th>Fiyat (örnek)</th>
+            <th>Pi Uygunluğu</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>Organik Zeytinyağı 5L</td>
+            <td>240 adet</td>
+            <td>12.50 USD</td>
+            <td>Uygun</td>
+          </tr>
+          <tr>
+            <td>Dondurulmuş Meyve Karışımı</td>
+            <td>1 konteyner</td>
+            <td>1.950 USD / ton</td>
+            <td>Uygun</td>
+          </tr>
+          <tr>
+            <td>Pamuklu T-Shirt (OEM)</td>
+            <td>1.000 adet</td>
+            <td>3.10 USD</td>
+            <td>Değerlendiriliyor</td>
+          </tr>
+          </tbody>
+        </table>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    TradePi Global · Üretici paneli demo ekranıdır. Veriler örnektir ve yalnızca
+    proje tanıtımı / hibe başvurusu amaçlıdır.
+  </footer>
 </div>
 </body>
-</html>
+            </html>
