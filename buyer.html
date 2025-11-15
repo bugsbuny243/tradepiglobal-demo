@@ -1,231 +1,63 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TradePi Global – Alıcı Paneli</title>
-  <style>
-    :root {
-      --bg:#020617;
-      --border:#111827;
-      --accent:#6366f1;
-      --accent-soft:rgba(99,102,241,.12);
-      --text-main:#e5e7eb;
-      --text-muted:#9ca3af;
-      --info:#38bdf8;
-    }
-    *{box-sizing:border-box;}
-    body{
-      margin:0;
-      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-      background:radial-gradient(circle at top left,#111827,#020617 55%);
-      color:var(--text-main);
-    }
-    a{color:inherit;text-decoration:none;}
-
-    .shell{min-height:100vh;display:flex;flex-direction:column;}
-    header{
-      border-bottom:1px solid var(--border);
-      background:rgba(2,6,23,.96);
-      backdrop-filter:blur(10px);
-      position:sticky;top:0;z-index:10;
-    }
-    .nav{
-      max-width:1120px;margin:0 auto;padding:12px 16px;
-      display:flex;align-items:center;justify-content:space-between;font-size:14px;
-    }
-    .logo{display:flex;align-items:center;gap:8px;font-weight:600;}
-    .logo-mark{
-      width:22px;height:22px;border-radius:999px;
-      background:radial-gradient(circle at 30% 20%,#facc15,#f97316 40%,#4f46e5);
-    }
-    .tag{font-size:11px;padding:2px 7px;border-radius:999px;background:rgba(148,163,184,.18);color:var(--text-muted);}
-    .btn-back{
-      font-size:13px;padding:7px 11px;border-radius:999px;
-      border:1px solid #1f2937;background:rgba(15,23,42,.9);
-      color:var(--text-muted);cursor:pointer;
-    }
-    .btn-back:hover{border-color:#4b5563;color:#e5e7eb;}
-
-    main{flex:1;max-width:1120px;margin:0 auto;padding:22px 16px 32px;}
-
-    .title-row{
-      display:flex;flex-wrap:wrap;gap:10px;
-      justify-content:space-between;align-items:flex-end;
-      margin-bottom:18px;
-    }
-    .title-row h1{margin:0;font-size:22px;}
-    .sub{font-size:13px;color:var(--text-muted);max-width:520px;}
-
-    .grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:16px;}
-    @media(max-width:768px){.grid{grid-template-columns:minmax(0,1fr);}}
-
-    .card{
-      background:rgba(15,23,42,.94);
-      border-radius:14px;border:1px solid var(--border);
-      padding:14px 14px 16px;font-size:13px;
-    }
-    .card h2{margin:0 0 6px;font-size:15px;}
-    .badge{
-      display:inline-block;font-size:10px;padding:2px 6px;
-      border-radius:999px;border:1px solid rgba(148,163,184,.6);
-      color:var(--text-muted);margin-bottom:6px;
-    }
-
-    .form-group{margin-top:8px;display:flex;flex-direction:column;gap:5px;}
-    label{font-size:12px;color:var(--text-muted);}
-    input,textarea,select{
-      background:#020617;border-radius:8px;border:1px solid #1f2937;
-      padding:7px 9px;color:var(--text-main);font-size:13px;font-family:inherit;
-    }
-    textarea{min-height:70px;resize:vertical;}
-    input:focus,textarea:focus,select:focus{
-      outline:none;border-color:var(--accent);
-      box-shadow:0 0 0 1px rgba(99,102,241,.4);
-    }
-
-    .btn-primary{
-      margin-top:10px;padding:9px 15px;border-radius:999px;
-      border:1px solid rgba(148,163,184,.5);
-      background:linear-gradient(135deg,#4f46e5,#06b6d4);
-      color:white;font-weight:600;font-size:13px;cursor:pointer;
-    }
-    .btn-primary:hover{opacity:.96;}
-
-    .info-box{
-      margin-top:10px;font-size:12px;color:var(--text-muted);
-      padding:8px 9px;border-radius:10px;
-      border:1px solid rgba(56,189,248,.4);
-      background:rgba(15,23,42,.9);
-    }
-
-    .stat-row{display:flex;flex-direction:column;gap:8px;margin-top:8px;}
-    .stat-pill{
-      padding:8px 9px;border-radius:10px;
-      background:rgba(15,23,42,.96);
-      border:1px solid #1f2937;font-size:11px;color:var(--text-muted);
-    }
-    .stat-pill strong{display:block;color:#e5e7eb;font-size:13px;margin-bottom:3px;}
-
-    ul.demo-list{margin:8px 0 0;padding-left:16px;font-size:12px;color:#cbd5f5;}
-
-    footer{
-      border-top:1px solid #020617;font-size:11px;color:var(--text-muted);
-      text-align:center;padding:10px 16px 14px;background:rgba(2,6,23,.96);
-    }
-  </style>
+  <meta charset="UTF-8">
+  <title>TradePi Global – Alıcı Avantajları</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="shell">
-  <header>
-    <div class="nav">
-      <div class="logo">
-        <div class="logo-mark"></div>
-        <div>TradePi Global</div>
-        <span class="tag">Alıcı Paneli · Demo</span>
-      </div>
-      <a href="index.html" class="btn-back">← Ana sayfaya dön</a>
-    </div>
-  </header>
 
-  <main>
-    <div class="title-row">
-      <div>
-        <h1>Alıcı / İthalatçı Kontrol Paneli</h1>
-        <p class="sub">
-          Zincir marketler, toptancılar ve ithalatçılar; ihtiyaçlarını bu panel
-          üzerinden bildirip onlarca üreticiden tek ekrandan teklif alabilir.
-          Bu sayfa tamamen demo amaçlıdır.
-        </p>
-      </div>
-    </div>
+<header class="top-nav">
+  <div class="logo">TradePi Global</div>
+  <nav>
+    <a href="/index.html">Ana Sayfa</a>
+    <a href="/producers.html">Üreticiler</a>
+    <a href="/buyers.html" class="active">Alıcılar</a>
+    <a href="/trust.html">Güven Sistemi</a>
+    <a href="/membership.html">Üyelik</a>
+  </nav>
+</header>
 
-    <div class="grid">
-      <!-- Sol: Talep formu -->
-      <section class="card">
-        <span class="badge">Toplu Alım Talebi (Demo)</span>
-        <h2>Yeni talep oluştur</h2>
+<section class="hero">
+  <h1>Alıcılar İçin TradePi Avantajları</h1>
+  <p>Zincir marketler, toptancılar, e-ticaret oyuncuları için direkt üreticiye erişim sağlayan güvenli B2B tedarik platformu.</p>
+</section>
 
-        <div class="form-group">
-          <label>Talep edilen ürün / ürün grubu</label>
-          <input placeholder="Örn: Dondurulmuş sebze karışımı, un, yağ vb." />
-        </div>
+<section class="advantages">
+  <div class="adv-card">
+    <h3>🔍 Direkt Üreticiye Erişim</h3>
+    <p>Aracı maliyetlerini ortadan kaldırarak daha düşük birim fiyatlarla yüksek hacimli alım yapabilirsiniz.</p>
+  </div>
 
-        <div class="form-group">
-          <label>Tahmini yıllık / dönemsel miktar</label>
-          <input placeholder="Örn: 3.000 ton / yıl, 500.000 adet / sezon" />
-        </div>
+  <div class="adv-card">
+    <h3>📦 Tek Panelden Toplu Teklif</h3>
+    <p>Birden fazla üreticiden tek ekranda teklif almak, fiyat ve MOQ karşılaştırması yapmak mümkündür.</p>
+  </div>
 
-        <div class="form-group">
-          <label>Hedef tedarik ülkeleri</label>
-          <input placeholder="Örn: Türkiye, Doğu Avrupa, MENA bölgesi" />
-        </div>
+  <div class="adv-card">
+    <h3>🔒 Emanet Güvenli Ödeme</h3>
+    <p>Ödeme önce TradePi emanet hesabına geçer; teslimat onayı sonrası üreticiye aktarılır.</p>
+  </div>
 
-        <div class="form-group">
-          <label>Bütçe aralığı (USD veya yerel para)</label>
-          <input placeholder="Örn: 250.000 – 400.000 USD" />
-        </div>
+  <div class="adv-card">
+    <h3>📊 Akıllı Eşleşme Sistemi</h3>
+    <p>Alım miktarı, kapasite, sertifika ve lojistik kriterlerine en uygun üreticiler otomatik eşleştirilir.</p>
+  </div>
 
-        <div class="form-group">
-          <label>İlave şartlar</label>
-          <textarea placeholder="Sertifika, ambalaj, teslim şekli, lojistik vb."></textarea>
-        </div>
+  <div class="adv-card">
+    <h3>🌎 Global Tedarik Zinciri</h3>
+    <p>Türkiye → Avrupa, MENA, Asya bölgesine kesintisiz büyük hacimli teslimatlar.</p>
+  </div>
 
-        <button class="btn-primary">Talebi simüle et (demo)</button>
+  <div class="adv-card">
+    <h3>💹 Düşük Komisyon</h3>
+    <p>Küçük siparişlerde %5, büyük hacimde %1.5’e düşen komisyon avantajı.</p>
+  </div>
+</section>
 
-        <div class="info-box">
-          Bu form, gerçek sistemde TradePi eşleşme motoruna düşecek ve ilgili
-          üreticilere filtrelenmiş olarak iletilecektir. Bu sayfa, iş modelini
-          anlatmak için demo olarak tasarlanmıştır.
-        </div>
-      </section>
+<footer>
+  <p>© 2025 TradePi Global – Tüm Hakları Saklıdır.</p>
+</footer>
 
-      <!-- Sağ: Özet & örnek talepler -->
-      <aside class="card">
-        <span class="badge">Alıcı Özeti</span>
-        <h2>Örnek eşleşme senaryoları</h2>
-
-        <div class="stat-row">
-          <div class="stat-pill">
-            <strong>Otomatik üretici eşleşme</strong>
-            Ürün, ülke, sertifika ve kapasite kriterlerine göre uygun üreticiler
-            listelenir.
-          </div>
-          <div class="stat-pill">
-            <strong>Pi ile ödeme opsiyonu</strong>
-            Uygun üreticilerde Pi ile kısmi tahsilat veya kapora senaryosu
-            simüle edilir.
-          </div>
-          <div class="stat-pill">
-            <strong>Tek ekranda teklif karşılaştırma</strong>
-            Farklı üreticilerden gelen teklifler tek tabloda yan yana
-            görülebilir (canlı sürüm hedefi).
-          </div>
-        </div>
-
-        <p style="font-size:12px;color:var(--text-muted);margin-top:10px;">
-          Aşağıda, sistem üzerinden gelebilecek örnek taleplerden bazıları
-          listelenmiştir:
-        </p>
-
-        <ul class="demo-list">
-          <li>AB standartlarında dondurulmuş sebze – 2.000 ton / yıl</li>
-          <li>Özel markalı (private label) zeytinyağı – 100.000 adet şişe</li>
-          <li>Organik kuruyemiş karışımı – 50.000 paket / çeyrek dönem</li>
-        </ul>
-
-        <p style="font-size:12px;color:var(--text-muted);margin-top:8px;">
-          Bu örnekler, TradePi Global’in gelecekte yönetilebilir B2B talep /
-          teklif akışını nasıl kurguladığını göstermek içindir.
-        </p>
-      </aside>
-    </div>
-  </main>
-
-  <footer>
-    TradePi Global · Alıcı paneli demo ekranıdır. Veriler örnektir ve yalnızca
-    proje tanıtımı / hibe başvurusu amaçlıdır.
-  </footer>
-</div>
 </body>
 </html>
