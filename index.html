@@ -1,349 +1,320 @@
-<!DOCTYPE html>
+   
+      <!DOCTYPE html>
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TradePi Global – Pi Network B2B Marketplace</title>
-  <style>
-    :root {
-      --bg: #020617;
-      --panel: #020617;
-      --card: #020617;
-      --border: #1f2933;
-      --accent: #6366f1;
-      --accent-soft: rgba(99,102,241,0.14);
-      --text-main: #e5e7eb;
-      --text-muted: #9ca3af;
-      --success: #22c55e;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top left, #111827, #020617 55%);
-      color: var(--text-main);
-    }
-    a { color: inherit; text-decoration: none; }
-
-    /* layout */
-    .shell {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-    header {
-      border-bottom: 1px solid #111827;
-      backdrop-filter: blur(10px);
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: rgba(2,6,23,0.96);
-    }
-    .nav {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 14px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 600;
-      letter-spacing: .02em;
-    }
-    .logo-mark {
-      width: 24px;
-      height: 24px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 20%, #facc15, #f97316 40%, #4f46e5);
-    }
-    .tag {
-      font-size: 11px;
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: rgba(148,163,184,.18);
-      color: var(--text-muted);
-    }
-
-    main {
-      flex: 1;
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 26px 16px 40px;
-    }
-
-    /* hero */
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.6fr);
-      gap: 26px;
-      align-items: center;
-    }
-    @media (max-width: 768px) {
-      .hero { grid-template-columns: minmax(0, 1fr); }
-    }
-
-    .hero-title {
-      font-size: clamp(24px, 4vw, 32px);
-      line-height: 1.2;
-      margin-bottom: 10px;
-    }
-    .hero-sub {
-      font-size: 15px;
-      color: var(--text-muted);
-      max-width: 460px;
-    }
-    .pi-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 4px 9px;
-      margin-bottom: 10px;
-      border-radius: 999px;
-      background: var(--accent-soft);
-      font-size: 11px;
-      color: #c7d2fe;
-      border: 1px solid rgba(129,140,248,.4);
-    }
-    .pi-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: #22c55e;
-      box-shadow: 0 0 0 4px rgba(34,197,94,.25);
-    }
-
-    .btn-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 22px;
-    }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 11px 18px;
-      border-radius: 999px;
-      font-size: 14px;
-      font-weight: 600;
-      border: 1px solid transparent;
-      cursor: pointer;
-      transition: background .18s, transform .14s, box-shadow .18s, border .18s;
-      white-space: nowrap;
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, #4f46e5, #22c55e);
-      border-color: rgba(148,163,184,.4);
-      box-shadow: 0 18px 40px rgba(15,23,42,.95);
-    }
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 18px 50px rgba(15,23,42,1);
-    }
-    .btn-outline {
-      background: rgba(15,23,42,.7);
-      border-color: #334155;
-      color: var(--text-muted);
-    }
-    .btn-outline:hover {
-      border-color: #6366f1;
-      color: #e5e7eb;
-      background: rgba(30,64,175,.38);
-    }
-    .btn-ghost {
-      border-color: transparent;
-      background: transparent;
-      color: var(--text-muted);
-      font-weight: 500;
-      padding-inline: 10px;
-    }
-    .btn-ghost span {
-      border-bottom: 1px dashed rgba(148,163,184,.6);
-    }
-
-    .hero-img-card {
-      border-radius: 18px;
-      border: 1px solid var(--border);
-      background: radial-gradient(circle at top, rgba(148,163,253,.17), #020617 52%);
-      padding: 14px 14px 16px;
-      box-shadow: 0 18px 45px rgba(15,23,42,.95);
-    }
-    .hero-stat {
-      display: flex;
-      justify-content: space-between;
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-    }
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 8px;
-      font-size: 11px;
-    }
-    .pill {
-      padding: 4px 7px;
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,.3);
-      background: rgba(15,23,42,.85);
-    }
-
-    /* features */
-    .section-label {
-      margin-top: 34px;
-      font-size: 12px;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      color: #64748b;
-    }
-    .features {
-      margin-top: 10px;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-    }
-    @media (max-width: 768px) {
-      .features { grid-template-columns: minmax(0, 1fr); }
-    }
-    .card {
-      background: rgba(15,23,42,.92);
-      border-radius: 14px;
-      border: 1px solid #111827;
-      padding: 14px 14px 18px;
-      font-size: 13px;
-    }
-    .card h3 {
-      font-size: 14px;
-      margin: 2px 0 6px;
-    }
-    .badge {
-      display: inline-block;
-      font-size: 10px;
-      padding: 2px 6px;
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,.5);
-      color: #9ca3af;
-    }
-
-    footer {
-      border-top: 1px solid #020617;
-      font-size: 12px;
-      color: var(--text-muted);
-      text-align: center;
-      padding: 14px 16px 18px;
-      background: rgba(2,6,23,.96);
-    }
-  </style>
+  <title>TradePi Global – Pi Destekli B2B Ticaret Platformu</title>
+  <meta name="description" content="TradePi Global, üretici ve alıcıyı güvenli emanet ödeme sistemi ile buluşturan, Pi destekli B2B ticaret platformudur.">
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-<div class="shell">
-
-  <header>
-    <div class="nav">
-      <div class="logo">
-        <div class="logo-mark"></div>
-        <div>TradePi Global</div>
-        <span class="tag">Pi-powered B2B • Demo</span>
+<body class="bg-slate-950 text-slate-100">
+  <!-- NAVBAR -->
+  <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur sticky top-0 z-30">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-400 via-orange-500 to-pink-500 flex items-center justify-center text-xs font-bold">
+          TP
+        </div>
+        <div>
+          <div class="font-semibold tracking-tight">TradePi Global</div>
+          <div class="text-xs text-slate-400">Pi destekli B2B ticaret</div>
+        </div>
       </div>
-      <div style="font-size:12px; color:#9ca3af;">
-        v0.1 · Test Ortamı
+      <nav class="hidden md:flex items-center gap-6 text-sm text-slate-300">
+        <a href="#how" class="hover:text-amber-400">Nasıl Çalışır?</a>
+        <a href="#producers" class="hover:text-amber-400">Üreticiler</a>
+        <a href="#buyers" class="hover:text-amber-400">Alıcılar</a>
+        <a href="#pi" class="hover:text-amber-400">Pi & Ödeme</a>
+        <a href="#contact" class="hover:text-amber-400">İletişim</a>
+      </nav>
+      <div class="flex items-center gap-2">
+        <button class="hidden sm:inline-flex px-3 py-1.5 rounded-full border border-slate-700 text-xs text-slate-200">
+          Giriş (yakında)
+        </button>
+        <a href="#preapply" class="px-4 py-1.5 rounded-full bg-amber-500 text-slate-950 text-xs font-semibold hover:bg-amber-400">
+          Ön Kayıt
+        </a>
       </div>
     </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <!-- left -->
+  <!-- HERO -->
+  <section class="pt-10 pb-14">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
       <div>
-        <div class="pi-chip">
-          <div class="pi-dot"></div>
-          Pi Network &amp; OpenMind tabanlı akıllı ticaret
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/40 bg-amber-500/5 text-xs text-amber-300 mb-4">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          Demo hazır • Gerçek platform inşa ediliyor
         </div>
-
-        <h1 class="hero-title">
-          Üretici ile Alıcıyı Pi Network Destekli
-          <span style="color:#a5b4fc;"> Akıllı B2B Pazarda</span> buluşturuyoruz.
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight mb-4">
+          Üretici ve alıcıyı <span class="text-amber-400">Pi destekli</span> 
+          güvenli B2B ticaretle buluştur.
         </h1>
-
-        <p class="hero-sub">
-          TradePi Global, dünya genelindeki üreticiler ile toptan alıcıları
-          bir araya getiren, Pi ile tahsilat ve yapay zekâ ile eşleşme
-          mantığına hazırlanan bir B2B e-ticaret altyapısıdır.
+        <p class="text-sm sm:text-base text-slate-300 mb-6">
+          TradePi Global, üreticilerin USD/TL ile satış yaptığı, alıcıların ise ister geleneksel ödeme ister Pi ile 
+          ödeme yapabildiği, emanet (escrow) yapısıyla çalışan yeni nesil B2B ticaret platformudur.
         </p>
-
-        <div class="btn-row">
-          <a href="producer.html" class="btn btn-primary">Üretici Girişi</a>
-          <a href="buyer.html" class="btn btn-outline">Alıcı Girişi</a>
-          <a href="marketplace.html" class="btn btn-ghost"><span>Demo Marketplace’i Gör</span></a>
+        <div class="flex flex-wrap gap-3 mb-6">
+          <a href="#preapply" class="px-5 py-2.5 rounded-full bg-amber-500 text-slate-950 text-sm font-semibold hover:bg-amber-400">
+            Üretici / Alıcı Ön Kaydı
+          </a>
+          <a href="#pi" class="px-5 py-2.5 rounded-full border border-slate-700 text-sm text-slate-200 hover:border-amber-400 hover:text-amber-300">
+            Ödeme modelini incele
+          </a>
+        </div>
+        <div class="flex flex-wrap gap-6 text-xs text-slate-400">
+          <div class="flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            Düşük ve dinamik komisyon
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            Emanet / escrow güvenliği
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            Pi + USD/TL uyumlu altyapı
+          </div>
         </div>
       </div>
 
-      <!-- right -->
-      <aside class="hero-img-card">
-        <div class="hero-stat">
-          <span style="font-weight:500; color:#e5e7eb;">TradePi Gösterge Paneli</span>
-          <span>Demo Ortamı</span>
+      <!-- Hero Card -->
+      <div class="relative">
+        <div class="absolute -inset-10 bg-gradient-to-tr from-amber-500/10 via-violet-500/10 to-sky-500/10 blur-3xl opacity-70"></div>
+        <div class="relative border border-slate-800 bg-slate-900/70 rounded-3xl p-5 shadow-xl">
+          <div class="flex items-center justify-between mb-3">
+            <div>
+              <p class="text-xs text-slate-400">Örnek B2B İşlem</p>
+              <p class="text-sm font-semibold">Gıda Toptan Sipariş</p>
+            </div>
+            <span class="px-2 py-1 rounded-full bg-emerald-500/10 text-emerald-300 text-[10px] border border-emerald-500/40">
+              Emanet Aktif
+            </span>
+          </div>
+          <div class="space-y-2 text-xs text-slate-300 mb-4">
+            <div class="flex justify-between">
+              <span>Alıcı</span><span class="text-slate-100 font-medium">Global Market A.Ş.</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Üretici</span><span class="text-slate-100 font-medium">Anadolu Gıda Ltd.</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Sipariş Tutarı</span><span class="text-slate-100 font-medium">10.000 USD</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Platform Komisyonu</span><span class="text-slate-100 font-medium">%3 (300 USD)</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Ödeme Yöntemi</span><span class="text-slate-100 font-medium">Pi → USD dönüşüm</span>
+            </div>
+          </div>
+          <div class="border-t border-slate-800 pt-3 space-y-2">
+            <p class="text-[11px] text-slate-400">
+              Alıcı siparişi Pi ile öder, tutar TradePi emanet hesabına düşer. Ürünler teslim alındıktan sonra üreticiye USD/TL olarak aktarılır.
+            </p>
+          </div>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <div style="margin-top:6px; font-size:12px; color:#9ca3af;">
-          Canlıya geçişte hedef:
+  <!-- HOW IT WORKS -->
+  <section id="how" class="py-12 border-t border-slate-800 bg-slate-950/60">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-xl sm:text-2xl font-semibold mb-6">TradePi nasıl çalışır?</h2>
+      <div class="grid md:grid-cols-3 gap-6 text-sm">
+        <div class="border border-slate-800 rounded-2xl p-4 bg-slate-900/60">
+          <div class="text-amber-400 text-xs font-semibold mb-2">1. Adım</div>
+          <h3 class="font-semibold mb-2">Üretici & Alıcı ön kaydı</h3>
+          <p class="text-slate-300">
+            Üreticiler ücretsiz kayıt olur, ürün ve kapasite bilgilerini girer. Alıcılar ise ihtiyaçlarını tanımlayarak
+            tedarik talebi oluşturur.
+          </p>
         </div>
-        <ul style="margin:6px 0 0; padding-left:16px; font-size:12px; color:#cbd5f5;">
-          <li>Pi ile hızlı ve masrafsız tahsilat</li>
-          <li>OpenMind destekli akıllı eşleşme motoru</li>
-          <li>Devlet hibe ve teşvikleri ile ölçeklenebilir altyapı</li>
+        <div class="border border-slate-800 rounded-2xl p-4 bg-slate-900/60">
+          <div class="text-amber-400 text-xs font-semibold mb-2">2. Adım</div>
+          <h3 class="font-semibold mb-2">Teklif ve eşleştirme</h3>
+          <p class="text-slate-300">
+            TradePi algoritması, uygun üreticileri alıcılarla eşleştirir. Fiyat, kapasite, sertifika ve lojistik
+            bilgileri tek panelde sunulur.
+          </p>
+        </div>
+        <div class="border border-slate-800 rounded-2xl p-4 bg-slate-900/60">
+          <div class="text-amber-400 text-xs font-semibold mb-2">3. Adım</div>
+          <h3 class="font-semibold mb-2">Emanetli ödeme ve teslimat</h3>
+          <p class="text-slate-300">
+            Ödeme önce TradePi emanet hesabına düşer. Mal teslimi ve onay sonrası, üreticiye USD/TL olarak aktarılır.
+            Pi sadece güvenli ve hızlı ödeme aracı olarak kullanılır.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCERS -->
+  <section id="producers" class="py-12">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-8 items-start">
+      <div>
+        <h2 class="text-xl sm:text-2xl font-semibold mb-3">Üreticiler için TradePi</h2>
+        <p class="text-sm text-slate-300 mb-4">
+          TradePi, üreticilerin ekstra masraf olmadan global alıcılara ulaşmasını sağlar. Üyelik ücretsizdir, sadece
+          satış gerçekleştiğinde kategoriye göre düşük komisyon alınır.
+        </p>
+        <ul class="text-sm text-slate-200 space-y-2 mb-5">
+          <li>• Üyelik ücreti yok, satış olduğunda komisyon</li>
+          <li>• Ödemeler USD/TL, Pi ile uğraşma zorunluluğu yok</li>
+          <li>• Gıda, tekstil, kimya, makine gibi farklı kategori desteği</li>
+          <li>• İleride lojistik ve kalite denetim hizmetleri ile tam entegrasyon</li>
         </ul>
-
-        <div class="pill-row">
-          <div class="pill">B2B Üretici Paneli</div>
-          <div class="pill">Toplu Alım Talepleri</div>
-          <div class="pill">Pi Network Ödeme Simülasyonu</div>
-          <div class="pill">Hibe / Teşvik Proje Demosu</div>
+        <a href="#preapply" class="inline-flex px-4 py-2 rounded-full bg-amber-500 text-slate-950 text-sm font-semibold hover:bg-amber-400">
+          Üretici olarak ön kayıt ol
+        </a>
+      </div>
+      <div class="border border-slate-800 rounded-2xl p-4 bg-slate-900/70 text-xs text-slate-300 space-y-2">
+        <div class="flex justify-between">
+          <span>Kategori</span><span class="font-medium text-slate-100">Gıda / Tarım</span>
         </div>
-      </aside>
-    </section>
-
-    <div class="section-label">Platform Katmanları</div>
-    <section class="features">
-      <article class="card">
-        <span class="badge">Üretici Katmanı</span>
-        <h3>Doğrudan Üreticiden Teklif</h3>
-        <p>
-          Üreticiler ürünlerini TradePi üzerinden listeleyerek dünya
-          pazarındaki kurumsal alıcılara Pi ile veya yerel para birimiyle
-          teklif verebilir.
+        <div class="flex justify-between">
+          <span>Komisyon</span><span class="font-medium text-slate-100">%5</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Küçük sipariş</span><span class="font-medium text-slate-100">0–500 USD</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Orta ölçek</span><span class="font-medium text-slate-100">500–5.000 USD → %3</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Büyük sipariş</span><span class="font-medium text-slate-100">5.000+ USD → %1.5</span>
+        </div>
+        <p class="pt-2 border-t border-slate-800 text-[11px]">
+          Komisyon oranları kategori ve sipariş hacmine göre dinamik olarak optimize edilir. Üretici, panelinde komisyonu
+          net şekilde görür.
         </p>
-      </article>
+      </div>
+    </div>
+  </section>
 
-      <article class="card">
-        <span class="badge">Alıcı Katmanı</span>
-        <h3>Akıllı Eşleşme &amp; Toplu Talep</h3>
-        <p>
-          Toptancılar, ithalatçılar ve zincir marketler; ihtiyaçlarını tek
-          formda bildirerek onlarca üreticiyle aynı anda eşleşir.
+  <!-- BUYERS -->
+  <section id="buyers" class="py-12 border-t border-slate-800 bg-slate-950/70">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-8 items-start">
+      <div>
+        <h2 class="text-xl sm:text-2xl font-semibold mb-3">Alıcılar için TradePi</h2>
+        <p class="text-sm text-slate-300 mb-4">
+          Zincir marketler, toptancılar, e-ticaret oyuncuları ve distribütörler; TradePi üzerinden direkt üreticiye
+          ulaşarak daha şeffaf ve güvenli tedarik zinciri kurabilir.
         </p>
-      </article>
-
-      <article class="card">
-        <span class="badge">Altyapı</span>
-        <h3>Pi Network &amp; OpenMind Entegrasyonu</h3>
+        <ul class="text-sm text-slate-200 space-y-2 mb-5">
+          <li>• Tek panelden birden fazla üreticiden teklif al</li>
+          <li>• Pi veya geleneksel yöntemlerle ödeme imkânı</li>
+          <li>• Emanetli ödeme sayesinde paran güvende</li>
+          <li>• İleride premium alıcı özellikleri (öncelikli erişim, özel teklifler)</li>
+        </ul>
+        <a href="#preapply" class="inline-flex px-4 py-2 rounded-full border border-amber-500 text-amber-300 text-sm font-semibold hover:bg-amber-500/10">
+          Alıcı olarak ön kayıt ol
+        </a>
+      </div>
+      <div class="border border-slate-800 rounded-2xl p-4 bg-slate-900/70 text-xs text-slate-300 space-y-2">
+        <p class="text-slate-200 font-medium mb-1">Örnek alıcı senaryosu</p>
         <p>
-          Pi cüzdanı ile ödeme onayı, OpenMind robot OS ile depo ve lojistik
-          otomasyonuna ilerleyen, geleceğe dönük bir Ar-Ge yol haritası.
+          Avrupa'da faaliyet gösteren bir perakende zinciri, Türkiye'den gıda ürünlerini TradePi üzerinden tedarik eder.
+          Ödeme Pi ile yapılır, sipariş tutarı sistemde USD olarak sabitlenir. Ürün teslim alındıktan sonra üreticiye
+          USD/TL olarak aktarılır.
         </p>
-      </article>
-    </section>
-  </main>
+        <p class="text-[11px] text-slate-400">
+          TradePi, alıcı için tedarik süreçlerini sadeleştirirken, üretici için yeni pazarlar açar.
+        </p>
+      </div>
+    </div>
+  </section>
 
-  <footer>
-    © 2025 TradePi Global · Bu site demo amaçlıdır ve hibe/teşvik
-    başvuruları için teknik ön gösterim niteliği taşır.
+  <!-- PI & PAYMENT -->
+  <section id="pi" class="py-12">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-xl sm:text-2xl font-semibold mb-3">Pi & Ödeme Modeli</h2>
+      <p class="text-sm text-slate-300 mb-5">
+        TradePi, Pi'yi merkezine alan ama Pi'ye bağımlı olmayan hibrit bir ödeme modeli kullanır. Amaç, Pi topluluğunu
+        platforma bağlarken, üreticilere stabil USD/TL akışı sağlamaktır.
+      </p>
+      <div class="grid md:grid-cols-3 gap-6 text-xs sm:text-sm">
+        <div class="border border-slate-800 rounded-2xl p-4 bg-slate-900/70">
+          <h3 class="font-semibold mb-2 text-amber-300">1. Emanet (Escrow)</h3>
+          <p class="text-slate-300">
+            Alıcı ödemeyi önce TradePi emanet hesabına gönderir. Ürün teslim alınmadan üreticiye aktarılmaz. Bu sayede
+            hem alıcı hem üretici korunur.
+          </p>
+        </div>
+        <div class="border border-slate-800 rounded-2xl p-4 bg-slate-900/70">
+          <h3 class="font-semibold mb-2 text-amber-300">2. Pi → USD/TL dönüşümü</h3>
+          <p class="text-slate-300">
+            Alıcı Pi ile ödeme yapmak isterse, sistemde sipariş tutarı USD olarak sabitlenir. Üretici, ödemeyi her
+            zaman klasik para birimiyle alır.
+          </p>
+        </div>
+        <div class="border border-slate-800 rounded-2xl p-4 bg-slate-900/70">
+          <h3 class="font-semibold mb-2 text-amber-300">3. Özel Pi mağazası</h3>
+          <p class="text-slate-300">
+            Kurucunun kendi markalı ürünleri, sadece Pi ile satın alınabilen özel bir mağazada satışa sunulacaktır.
+            Böylece Pi topluluğu için gerçek kullanım senaryosu oluşur.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREAPPLY -->
+  <section id="preapply" class="py-12 border-t border-slate-800 bg-slate-950/80">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-xl sm:text-2xl font-semibold mb-3">Üretici veya alıcı olarak ön kayıt ol</h2>
+      <p class="text-sm text-slate-300 mb-4">
+        TradePi'nin tam sürümü geliştirme aşamasında. Şu anda üretici ve alıcı ön kayıtları alınmaktadır. Aşağıdaki
+        kanallardan kendinizi kısaca tanıtmanız, proje lansmanında ilk davet edilenler arasında olmanızı sağlar.
+      </p>
+      <div class="grid md:grid-cols-2 gap-6 text-sm">
+        <div class="border border-slate-800 rounded-2xl p-4 bg-slate-900/70">
+          <h3 class="font-semibold mb-2">E-posta ile ön kayıt</h3>
+          <p class="text-slate-300 mb-3">
+            Şirket veya alıcı bilgilerinizi kısaca yazarak e-posta gönderebilirsiniz:
+          </p>
+          <a href="mailto:info@tradepiglobal.com?subject=TradePi%20%C3%96n%20Kay%C4%B1t"
+             class="inline-flex px-4 py-2 rounded-full bg-amber-500 text-slate-950 font-semibold hover:bg-amber-400">
+            E-posta ile başvur
+          </a>
+          <p class="text-[11px] text-slate-400 mt-3">
+            (E-posta adresini kendi adresine göre güncelleyebilirsin: info@tradepiglobal.com yerine kendi mailini yaz.)
+          </p>
+        </div>
+        <div class="border border-slate-800 rounded-2xl p-4 bg-slate-900/70">
+          <h3 class="font-semibold mb-2">WhatsApp / İletişim</h3>
+          <p class="text-slate-300 mb-3">
+            Tercih edersen WhatsApp üzerinden de ön kayıt alabilirsin:
+          </p>
+          <a href="https://wa.me/9000000000000" target="_blank"
+             class="inline-flex px-4 py-2 rounded-full border border-emerald-500 text-emerald-300 font-semibold hover:bg-emerald-500/10">
+            WhatsApp ile iletişim
+          </a>
+          <p class="text-[11px] text-slate-400 mt-3">
+            (Buradaki numarayı kendi WhatsApp numarına göre değiştir: <code>https://wa.me/9XXXXXXXXXXX</code>)
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / FOOTER -->
+  <footer id="contact" class="py-8 border-t border-slate-800 bg-slate-950">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row gap-4 md:items-center md:justify-between">
+      <div>
+        <p class="text-sm font-semibold">TradePi Global</p>
+        <p class="text-xs text-slate-400">
+          Pi destekli B2B ticaret ve emanet ödeme altyapısı. Şu an prototip ve ön kayıt aşamasındadır.
+        </p>
+      </div>
+      <div class="text-xs text-slate-500 space-y-1">
+        <p>Kurucu: Onur Sel</p>
+        <p>E-posta: <span class="text-slate-300">info@tradepiglobal.com</span> (kendi mailinle değiştir)</p>
+      </div>
+    </div>
   </footer>
-</div>
 </body>
 </html>
