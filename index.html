@@ -1,320 +1,149 @@
-   
-      <!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TradePi Global – Pi Destekli B2B Ticaret Platformu</title>
-  <meta name="description" content="TradePi Global, üretici ve alıcıyı güvenli emanet ödeme sistemi ile buluşturan, Pi destekli B2B ticaret platformudur.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TradePi Global – B2B Marketplace</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="bg-slate-950 text-slate-100">
-  <!-- NAVBAR -->
-  <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur sticky top-0 z-30">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <div class="flex items-center gap-2">
-        <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-400 via-orange-500 to-pink-500 flex items-center justify-center text-xs font-bold">
-          TP
-        </div>
-        <div>
-          <div class="font-semibold tracking-tight">TradePi Global</div>
-          <div class="text-xs text-slate-400">Pi destekli B2B ticaret</div>
-        </div>
-      </div>
-      <nav class="hidden md:flex items-center gap-6 text-sm text-slate-300">
-        <a href="#how" class="hover:text-amber-400">Nasıl Çalışır?</a>
-        <a href="#producers" class="hover:text-amber-400">Üreticiler</a>
-        <a href="#buyers" class="hover:text-amber-400">Alıcılar</a>
-        <a href="#pi" class="hover:text-amber-400">Pi & Ödeme</a>
-        <a href="#contact" class="hover:text-amber-400">İletişim</a>
-      </nav>
-      <div class="flex items-center gap-2">
-        <button class="hidden sm:inline-flex px-3 py-1.5 rounded-full border border-slate-700 text-xs text-slate-200">
-          Giriş (yakında)
-        </button>
-        <a href="#preapply" class="px-4 py-1.5 rounded-full bg-amber-500 text-slate-950 text-xs font-semibold hover:bg-amber-400">
-          Ön Kayıt
-        </a>
-      </div>
-    </div>
-  </header>
 
-  <!-- HERO -->
-  <section class="pt-10 pb-14">
-    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
+<!-- NAVBAR -->
+<header class="bg-slate-950/80 backdrop-blur border-b border-slate-800 sticky top-0 z-50">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2">
+      <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 to-pink-500 flex items-center justify-center font-bold text-sm">TP</div>
       <div>
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/40 bg-amber-500/5 text-xs text-amber-300 mb-4">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          Demo hazır • Gerçek platform inşa ediliyor
-        </div>
-        <h1 class="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight mb-4">
-          Üretici ve alıcıyı <span class="text-amber-400">Pi destekli</span> 
-          güvenli B2B ticaretle buluştur.
-        </h1>
-        <p class="text-sm sm:text-base text-slate-300 mb-6">
-          TradePi Global, üreticilerin USD/TL ile satış yaptığı, alıcıların ise ister geleneksel ödeme ister Pi ile 
-          ödeme yapabildiği, emanet (escrow) yapısıyla çalışan yeni nesil B2B ticaret platformudur.
-        </p>
-        <div class="flex flex-wrap gap-3 mb-6">
-          <a href="#preapply" class="px-5 py-2.5 rounded-full bg-amber-500 text-slate-950 text-sm font-semibold hover:bg-amber-400">
-            Üretici / Alıcı Ön Kaydı
-          </a>
-          <a href="#pi" class="px-5 py-2.5 rounded-full border border-slate-700 text-sm text-slate-200 hover:border-amber-400 hover:text-amber-300">
-            Ödeme modelini incele
-          </a>
-        </div>
-        <div class="flex flex-wrap gap-6 text-xs text-slate-400">
-          <div class="flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-            Düşük ve dinamik komisyon
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-            Emanet / escrow güvenliği
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-            Pi + USD/TL uyumlu altyapı
-          </div>
-        </div>
+        <div class="font-semibold text-lg">TradePi Global</div>
+        <div class="text-[11px] text-slate-400">Worldwide B2B Marketplace</div>
       </div>
+    </a>
 
-      <!-- Hero Card -->
-      <div class="relative">
-        <div class="absolute -inset-10 bg-gradient-to-tr from-amber-500/10 via-violet-500/10 to-sky-500/10 blur-3xl opacity-70"></div>
-        <div class="relative border border-slate-800 bg-slate-900/70 rounded-3xl p-5 shadow-xl">
-          <div class="flex items-center justify-between mb-3">
-            <div>
-              <p class="text-xs text-slate-400">Örnek B2B İşlem</p>
-              <p class="text-sm font-semibold">Gıda Toptan Sipariş</p>
-            </div>
-            <span class="px-2 py-1 rounded-full bg-emerald-500/10 text-emerald-300 text-[10px] border border-emerald-500/40">
-              Emanet Aktif
-            </span>
-          </div>
-          <div class="space-y-2 text-xs text-slate-300 mb-4">
-            <div class="flex justify-between">
-              <span>Alıcı</span><span class="text-slate-100 font-medium">Global Market A.Ş.</span>
-            </div>
-            <div class="flex justify-between">
-              <span>Üretici</span><span class="text-slate-100 font-medium">Anadolu Gıda Ltd.</span>
-            </div>
-            <div class="flex justify-between">
-              <span>Sipariş Tutarı</span><span class="text-slate-100 font-medium">10.000 USD</span>
-            </div>
-            <div class="flex justify-between">
-              <span>Platform Komisyonu</span><span class="text-slate-100 font-medium">%3 (300 USD)</span>
-            </div>
-            <div class="flex justify-between">
-              <span>Ödeme Yöntemi</span><span class="text-slate-100 font-medium">Pi → USD dönüşüm</span>
-            </div>
-          </div>
-          <div class="border-t border-slate-800 pt-3 space-y-2">
-            <p class="text-[11px] text-slate-400">
-              Alıcı siparişi Pi ile öder, tutar TradePi emanet hesabına düşer. Ürünler teslim alındıktan sonra üreticiye USD/TL olarak aktarılır.
-            </p>
-          </div>
-        </div>
-      </div>
+    <nav class="hidden md:flex gap-6 text-sm">
+      <a href="#hakkimizda" class="hover:text-amber-400">Hakkımızda</a>
+      <a href="#misyon" class="hover:text-amber-400">Misyon & Vizyon</a>
+      <a href="#ureticiler" class="hover:text-amber-400">Üretici Avantajları</a>
+      <a href="#alicilar" class="hover:text-amber-400">Alıcı Avantajları</a>
+      <a href="#guven" class="hover:text-amber-400">Güven Sistemi</a>
+      <a href="membership.html" class="hover:text-emerald-400">Üyelik</a>
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <a href="#" class="text-sm hover:text-amber-400">Giriş Yap</a>
+      <a href="membership.html" class="px-4 py-2 bg-amber-500 text-slate-950 rounded-full text-sm hover:bg-amber-400">Üye Ol</a>
     </div>
-  </section>
+  </div>
+</header>
 
-  <!-- HOW IT WORKS -->
-  <section id="how" class="py-12 border-t border-slate-800 bg-slate-950/60">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-xl sm:text-2xl font-semibold mb-6">TradePi nasıl çalışır?</h2>
-      <div class="grid md:grid-cols-3 gap-6 text-sm">
-        <div class="border border-slate-800 rounded-2xl p-4 bg-slate-900/60">
-          <div class="text-amber-400 text-xs font-semibold mb-2">1. Adım</div>
-          <h3 class="font-semibold mb-2">Üretici & Alıcı ön kaydı</h3>
-          <p class="text-slate-300">
-            Üreticiler ücretsiz kayıt olur, ürün ve kapasite bilgilerini girer. Alıcılar ise ihtiyaçlarını tanımlayarak
-            tedarik talebi oluşturur.
-          </p>
-        </div>
-        <div class="border border-slate-800 rounded-2xl p-4 bg-slate-900/60">
-          <div class="text-amber-400 text-xs font-semibold mb-2">2. Adım</div>
-          <h3 class="font-semibold mb-2">Teklif ve eşleştirme</h3>
-          <p class="text-slate-300">
-            TradePi algoritması, uygun üreticileri alıcılarla eşleştirir. Fiyat, kapasite, sertifika ve lojistik
-            bilgileri tek panelde sunulur.
-          </p>
-        </div>
-        <div class="border border-slate-800 rounded-2xl p-4 bg-slate-900/60">
-          <div class="text-amber-400 text-xs font-semibold mb-2">3. Adım</div>
-          <h3 class="font-semibold mb-2">Emanetli ödeme ve teslimat</h3>
-          <p class="text-slate-300">
-            Ödeme önce TradePi emanet hesabına düşer. Mal teslimi ve onay sonrası, üreticiye USD/TL olarak aktarılır.
-            Pi sadece güvenli ve hızlı ödeme aracı olarak kullanılır.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- HERO -->
+<section class="max-w-6xl mx-auto px-4 py-16">
+  <h1 class="text-3xl sm:text-5xl font-bold mb-4">Dünya Üreticilerini ve Alıcılarını Tek Platformda Buluşturan</h1>
+  <p class="text-slate-300 text-lg max-w-2xl">
+    TradePi Global, modern B2B ticaret sistemini bir araya getirerek, üreticilere ve alıcılara güvenli, hızlı ve şeffaf bir ticaret deneyimi sunar.
+  </p>
+</section>
 
-  <!-- PRODUCERS -->
-  <section id="producers" class="py-12">
-    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-8 items-start">
-      <div>
-        <h2 class="text-xl sm:text-2xl font-semibold mb-3">Üreticiler için TradePi</h2>
-        <p class="text-sm text-slate-300 mb-4">
-          TradePi, üreticilerin ekstra masraf olmadan global alıcılara ulaşmasını sağlar. Üyelik ücretsizdir, sadece
-          satış gerçekleştiğinde kategoriye göre düşük komisyon alınır.
-        </p>
-        <ul class="text-sm text-slate-200 space-y-2 mb-5">
-          <li>• Üyelik ücreti yok, satış olduğunda komisyon</li>
-          <li>• Ödemeler USD/TL, Pi ile uğraşma zorunluluğu yok</li>
-          <li>• Gıda, tekstil, kimya, makine gibi farklı kategori desteği</li>
-          <li>• İleride lojistik ve kalite denetim hizmetleri ile tam entegrasyon</li>
-        </ul>
-        <a href="#preapply" class="inline-flex px-4 py-2 rounded-full bg-amber-500 text-slate-950 text-sm font-semibold hover:bg-amber-400">
-          Üretici olarak ön kayıt ol
-        </a>
-      </div>
-      <div class="border border-slate-800 rounded-2xl p-4 bg-slate-900/70 text-xs text-slate-300 space-y-2">
-        <div class="flex justify-between">
-          <span>Kategori</span><span class="font-medium text-slate-100">Gıda / Tarım</span>
-        </div>
-        <div class="flex justify-between">
-          <span>Komisyon</span><span class="font-medium text-slate-100">%5</span>
-        </div>
-        <div class="flex justify-between">
-          <span>Küçük sipariş</span><span class="font-medium text-slate-100">0–500 USD</span>
-        </div>
-        <div class="flex justify-between">
-          <span>Orta ölçek</span><span class="font-medium text-slate-100">500–5.000 USD → %3</span>
-        </div>
-        <div class="flex justify-between">
-          <span>Büyük sipariş</span><span class="font-medium text-slate-100">5.000+ USD → %1.5</span>
-        </div>
-        <p class="pt-2 border-t border-slate-800 text-[11px]">
-          Komisyon oranları kategori ve sipariş hacmine göre dinamik olarak optimize edilir. Üretici, panelinde komisyonu
-          net şekilde görür.
-        </p>
-      </div>
-    </div>
-  </section>
+<!-- HAKKIMIZDA -->
+<section id="hakkimizda" class="max-w-6xl mx-auto px-4 py-10">
+  <h2 class="text-2xl font-bold mb-3">Hakkımızda</h2>
+  <p class="text-slate-300 text-sm leading-relaxed">
+    TradePi Global, üretici ve alıcıları dünya pazarında tek bir çatıda buluşturan yeni nesil B2B ticaret platformudur.
+    Amacımız; aracıları ortadan kaldırarak doğrudan üretimden tüketiciye güvenli ticaret sunmak, global pazarlara erişimi kolaylaştırmak ve maliyetleri azaltmaktır.
+  </p>
+</section>
 
-  <!-- BUYERS -->
-  <section id="buyers" class="py-12 border-t border-slate-800 bg-slate-950/70">
-    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-8 items-start">
-      <div>
-        <h2 class="text-xl sm:text-2xl font-semibold mb-3">Alıcılar için TradePi</h2>
-        <p class="text-sm text-slate-300 mb-4">
-          Zincir marketler, toptancılar, e-ticaret oyuncuları ve distribütörler; TradePi üzerinden direkt üreticiye
-          ulaşarak daha şeffaf ve güvenli tedarik zinciri kurabilir.
-        </p>
-        <ul class="text-sm text-slate-200 space-y-2 mb-5">
-          <li>• Tek panelden birden fazla üreticiden teklif al</li>
-          <li>• Pi veya geleneksel yöntemlerle ödeme imkânı</li>
-          <li>• Emanetli ödeme sayesinde paran güvende</li>
-          <li>• İleride premium alıcı özellikleri (öncelikli erişim, özel teklifler)</li>
-        </ul>
-        <a href="#preapply" class="inline-flex px-4 py-2 rounded-full border border-amber-500 text-amber-300 text-sm font-semibold hover:bg-amber-500/10">
-          Alıcı olarak ön kayıt ol
-        </a>
-      </div>
-      <div class="border border-slate-800 rounded-2xl p-4 bg-slate-900/70 text-xs text-slate-300 space-y-2">
-        <p class="text-slate-200 font-medium mb-1">Örnek alıcı senaryosu</p>
-        <p>
-          Avrupa'da faaliyet gösteren bir perakende zinciri, Türkiye'den gıda ürünlerini TradePi üzerinden tedarik eder.
-          Ödeme Pi ile yapılır, sipariş tutarı sistemde USD olarak sabitlenir. Ürün teslim alındıktan sonra üreticiye
-          USD/TL olarak aktarılır.
-        </p>
-        <p class="text-[11px] text-slate-400">
-          TradePi, alıcı için tedarik süreçlerini sadeleştirirken, üretici için yeni pazarlar açar.
-        </p>
-      </div>
-    </div>
-  </section>
+<!-- MİSYON / VİZYON -->
+<section id="misyon" class="max-w-6xl mx-auto px-4 py-10">
+  <h2 class="text-2xl font-bold mb-3">Misyon & Vizyon</h2>
+  <p class="text-slate-300 text-sm leading-relaxed">
+    Misyonumuz; ticareti daha şeffaf, erişilebilir ve düşük maliyetli hale getirerek üreticilere güç katmak.  
+    Vizyonumuz; dünya çapında milyonlarca işletmenin güvenle ticaret yaptığı lider bir B2B ekosistemi oluşturmaktır.
+  </p>
+</section>
 
-  <!-- PI & PAYMENT -->
-  <section id="pi" class="py-12">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-xl sm:text-2xl font-semibold mb-3">Pi & Ödeme Modeli</h2>
-      <p class="text-sm text-slate-300 mb-5">
-        TradePi, Pi'yi merkezine alan ama Pi'ye bağımlı olmayan hibrit bir ödeme modeli kullanır. Amaç, Pi topluluğunu
-        platforma bağlarken, üreticilere stabil USD/TL akışı sağlamaktır.
+<!-- ÜRETİCİ AVANTAJLARI -->
+<section id="ureticiler" class="max-w-6xl mx-auto px-4 py-10">
+  <h2 class="text-2xl font-bold mb-3">Üretici Avantajları</h2>
+  <ul class="text-slate-300 text-sm space-y-2">
+    <li>• Global alıcı kitlesine ücretsiz erişim</li>
+    <li>• Ürünleri komisyonsuz listeleme</li>
+    <li>• Toplu sipariş alma sistemi</li>
+    <li>• Üretim kapasitesine göre talepleri filtreleme</li>
+    <li>• Markanı dünya pazarına açma fırsatı</li>
+  </ul>
+</section>
+
+<!-- ALICI AVANTAJLARI -->
+<section id="alicilar" class="max-w-6xl mx-auto px-4 py-10">
+  <h2 class="text-2xl font-bold mb-3">Alıcı Avantajları</h2>
+  <ul class="text-slate-300 text-sm space-y-2">
+    <li>• Doğrudan üreticiden fabrika çıkış fiyatı</li>
+    <li>• Güvenli ticaret, yakında emanet sistemi</li>
+    <li>• Tek panelden yüzlerce üreticiye ulaşım</li>
+    <li>• Minimum sipariş miktarlarını karşılaştırma</li>
+    <li>• Global tedarik zincirine erişim</li>
+  </ul>
+</section>
+
+<!-- GÜVEN SİSTEMİ -->
+<section id="guven" class="max-w-6xl mx-auto px-4 py-10">
+  <h2 class="text-2xl font-bold mb-3">Güven Sistemi</h2>
+  <ul class="text-slate-300 text-sm space-y-2">
+    <li>• Emanet (escrow) ödeme sistemi – Yakında</li>
+    <li>• Üretici doğrulama</li>
+    <li>• Alıcı güven puanı</li>
+    <li>• Sipariş – teslimat takip altyapısı</li>
+    <li>• Şeffaf ve kayıt altına alınmış ticaret yapısı</li>
+  </ul>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-slate-900 border-t border-slate-800 mt-10">
+  <div class="max-w-6xl mx-auto px-4 py-10 grid grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div>
+      <h3 class="text-amber-400 font-semibold mb-3">TradePi Global</h3>
+      <p class="text-sm text-slate-400">
+        Dünya üreticilerini ve alıcılarını güvenli, hızlı ve şeffaf bir ticaret ortamında buluşturan B2B platform.
       </p>
-      <div class="grid md:grid-cols-3 gap-6 text-xs sm:text-sm">
-        <div class="border border-slate-800 rounded-2xl p-4 bg-slate-900/70">
-          <h3 class="font-semibold mb-2 text-amber-300">1. Emanet (Escrow)</h3>
-          <p class="text-slate-300">
-            Alıcı ödemeyi önce TradePi emanet hesabına gönderir. Ürün teslim alınmadan üreticiye aktarılmaz. Bu sayede
-            hem alıcı hem üretici korunur.
-          </p>
-        </div>
-        <div class="border border-slate-800 rounded-2xl p-4 bg-slate-900/70">
-          <h3 class="font-semibold mb-2 text-amber-300">2. Pi → USD/TL dönüşümü</h3>
-          <p class="text-slate-300">
-            Alıcı Pi ile ödeme yapmak isterse, sistemde sipariş tutarı USD olarak sabitlenir. Üretici, ödemeyi her
-            zaman klasik para birimiyle alır.
-          </p>
-        </div>
-        <div class="border border-slate-800 rounded-2xl p-4 bg-slate-900/70">
-          <h3 class="font-semibold mb-2 text-amber-300">3. Özel Pi mağazası</h3>
-          <p class="text-slate-300">
-            Kurucunun kendi markalı ürünleri, sadece Pi ile satın alınabilen özel bir mağazada satışa sunulacaktır.
-            Böylece Pi topluluğu için gerçek kullanım senaryosu oluşur.
-          </p>
-        </div>
-      </div>
     </div>
-  </section>
 
-  <!-- PREAPPLY -->
-  <section id="preapply" class="py-12 border-t border-slate-800 bg-slate-950/80">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-xl sm:text-2xl font-semibold mb-3">Üretici veya alıcı olarak ön kayıt ol</h2>
-      <p class="text-sm text-slate-300 mb-4">
-        TradePi'nin tam sürümü geliştirme aşamasında. Şu anda üretici ve alıcı ön kayıtları alınmaktadır. Aşağıdaki
-        kanallardan kendinizi kısaca tanıtmanız, proje lansmanında ilk davet edilenler arasında olmanızı sağlar.
-      </p>
-      <div class="grid md:grid-cols-2 gap-6 text-sm">
-        <div class="border border-slate-800 rounded-2xl p-4 bg-slate-900/70">
-          <h3 class="font-semibold mb-2">E-posta ile ön kayıt</h3>
-          <p class="text-slate-300 mb-3">
-            Şirket veya alıcı bilgilerinizi kısaca yazarak e-posta gönderebilirsiniz:
-          </p>
-          <a href="mailto:info@tradepiglobal.com?subject=TradePi%20%C3%96n%20Kay%C4%B1t"
-             class="inline-flex px-4 py-2 rounded-full bg-amber-500 text-slate-950 font-semibold hover:bg-amber-400">
-            E-posta ile başvur
-          </a>
-          <p class="text-[11px] text-slate-400 mt-3">
-            (E-posta adresini kendi adresine göre güncelleyebilirsin: info@tradepiglobal.com yerine kendi mailini yaz.)
-          </p>
-        </div>
-        <div class="border border-slate-800 rounded-2xl p-4 bg-slate-900/70">
-          <h3 class="font-semibold mb-2">WhatsApp / İletişim</h3>
-          <p class="text-slate-300 mb-3">
-            Tercih edersen WhatsApp üzerinden de ön kayıt alabilirsin:
-          </p>
-          <a href="https://wa.me/9000000000000" target="_blank"
-             class="inline-flex px-4 py-2 rounded-full border border-emerald-500 text-emerald-300 font-semibold hover:bg-emerald-500/10">
-            WhatsApp ile iletişim
-          </a>
-          <p class="text-[11px] text-slate-400 mt-3">
-            (Buradaki numarayı kendi WhatsApp numarına göre değiştir: <code>https://wa.me/9XXXXXXXXXXX</code>)
-          </p>
-        </div>
-      </div>
+    <div>
+      <h4 class="text-slate-200 font-semibold mb-3">Platform</h4>
+      <ul class="space-y-1 text-sm text-slate-400">
+        <li><a href="#ureticiler" class="hover:text-amber-400">Üretici Avantajları</a></li>
+        <li><a href="#alicilar" class="hover:text-amber-400">Alıcı Avantajları</a></li>
+        <li><a href="#guven" class="hover:text-amber-400">Güven Sistemi</a></li>
+        <li><a href="membership.html" class="hover:text-amber-400">Üyelik</a></li>
+      </ul>
     </div>
-  </section>
 
-  <!-- CONTACT / FOOTER -->
-  <footer id="contact" class="py-8 border-t border-slate-800 bg-slate-950">
-    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row gap-4 md:items-center md:justify-between">
-      <div>
-        <p class="text-sm font-semibold">TradePi Global</p>
-        <p class="text-xs text-slate-400">
-          Pi destekli B2B ticaret ve emanet ödeme altyapısı. Şu an prototip ve ön kayıt aşamasındadır.
-        </p>
-      </div>
-      <div class="text-xs text-slate-500 space-y-1">
-        <p>Kurucu: Onur Sel</p>
-        <p>E-posta: <span class="text-slate-300">info@tradepiglobal.com</span> (kendi mailinle değiştir)</p>
-      </div>
+    <div>
+      <h4 class="text-slate-200 font-semibold mb-3">Kurumsal</h4>
+      <ul class="space-y-1 text-sm text-slate-400">
+        <li>Hakkımızda</li>
+        <li>Misyon & Vizyon</li>
+        <li>Global Tedarik İlkeleri</li>
+        <li>Gizlilik & KVKK</li>
+      </ul>
     </div>
-  </footer>
+
+    <div>
+      <h4 class="text-slate-200 font-semibold mb-3">İletişim</h4>
+      <ul class="space-y-1 text-sm text-slate-400">
+        <li>Email: support@tradepi.com</li>
+        <li>Destek Merkezi</li>
+        <li>Türkiye Operasyon Ofisi</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="border-t border-slate-800 py-4 text-center text-xs text-slate-500">
+    © 2025 TradePi Global – All Rights Reserved.
+  </div>
+</footer>
+
 </body>
 </html>
