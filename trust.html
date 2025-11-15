@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>TradePi Global – Güven Sistemi (Demo)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #020617 55%, #000 100%);
+      color: #e5e7eb;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+
+    header {
+      border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+      backdrop-filter: blur(16px);
+      background: linear-gradient(to bottom, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.4));
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      gap: 16px;
+      font-size: 13px;
+    }
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #fef3c7, #f97316);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 16px;
+      color: #111827;
+      box-shadow: 0 0 30px rgba(248, 250, 252, 0.25);
+    }
+    .logo-text { display: flex; flex-direction: column; gap: 2px; }
+    .logo-title { font-weight: 700; letter-spacing: 0.02em; font-size: 15px; }
+    .logo-subtitle { font-size: 11px; color: #9ca3af; }
+
+    .nav-links { display: flex; gap: 18px; align-items: center; font-size: 13px; }
+    .nav-links a { color: #9ca3af; position: relative; padding-bottom: 2px; }
+    .nav-links a:hover { color: #f9fafb; }
+    .nav-links a.active::after {
+      content:""; position:absolute; left:0; bottom:0; width:16px; height:2px;
+      border-radius:999px; background: linear-gradient(to right,#facc15,#4f46e5);
+    }
+    .nav-actions { display:flex; gap:10px; }
+    .btn {
+      border-radius: 999px;
+      border: 1px solid #1f2937;
+      background: rgba(15,23,42,0.7);
+      color: #e5e7eb;
+      font-size: 12px;
+      padding: 6px 12px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg,#4f46e5,#facc15);
+      border-color: transparent;
+      color:#020617;
+      font-weight:600;
+    }
+
+    main { padding: 26px 0 24px; }
+    h1 { font-size: 24px; margin-bottom: 6px; }
+    .sub { font-size: 13px; color:#9ca3af; max-width:720px; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1.1fr;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .card {
+      background: #101827;
+      border-radius: 16px;
+      border: 1px solid #1f2937;
+      padding: 14px 14px 16px;
+      font-size: 12px;
+    }
+    .card h2 { font-size: 15px; margin-bottom: 6px; }
+    .card p { color:#9ca3af; margin-bottom: 8px; }
+
+    .tag {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color:#93c5fd;
+      margin-bottom:4px;
+    }
+
+    ul { margin: 0; padding-left: 18px; color:#9ca3af; }
+    li { margin-bottom: 4px; }
+
+    .flow {
+      margin-top: 18px;
+      display: grid;
+      gap: 10px;
+    }
+    .step {
+      display:flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 12px;
+    }
+    .step-no {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      border: 1px solid #facc15;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size: 11px;
+      color:#facc15;
+      margin-top: 2px;
+    }
+    .step strong { display:block; margin-bottom:2px; color:#e5e7eb; }
+
+    .note {
+      margin-top: 14px;
+      font-size: 11px;
+      color:#9ca3af;
+      border-radius: 10px;
+      padding: 8px 10px;
+      background: rgba(15,23,42,0.9);
+      border: 1px dashed #4b5563;
+    }
+
+    footer {
+      border-top: 1px solid rgba(31,41,55,0.9);
+      background: radial-gradient(circle at top, rgba(15,23,42,0.9), #020617);
+      margin-top: 24px;
+      padding: 18px 0;
+      font-size: 11px;
+      color:#9ca3af;
+    }
+    .footer-grid {
+      display:grid;
+      grid-template-columns: 1.6fr repeat(3,minmax(0,1fr));
+      gap:18px;
+      margin-bottom: 14px;
+    }
+    .footer-title {
+      font-size:12px;
+      font-weight:600;
+      margin-bottom:6px;
+      color:#e5e7eb;
+    }
+    .footer-links {
+      list-style:none;
+      padding:0;
+      margin:0;
+      display:grid;
+      gap:4px;
+    }
+    .footer-links a { color:#9ca3af; }
+    .footer-links a:hover { color:#f9fafb; }
+    .footer-copy {
+      border-top:1px solid rgba(31,41,55,0.8);
+      padding-top:8px;
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    @media(max-width:900px){
+      .grid{ grid-template-columns:minmax(0,1fr); }
+      .footer-grid{ grid-template-columns:minmax(0,1fr); }
+    }
+    @media(max-width:720px){
+      .nav{ flex-wrap:wrap; align-items:flex-start; }
+      .nav-links{ flex-wrap:wrap; font-size:12px; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a href="index.html" class="logo-wrap">
+      <div class="logo-icon">TP</div>
+      <div class="logo-text">
+        <span class="logo-title">TradePi Global</span>
+        <span class="logo-subtitle">Pi destekli güvenli B2B ticaret</span>
+      </div>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Nasıl Çalışır?</a>
+      <a href="producer.html">Üreticiler</a>
+      <a href="buyer.html">Alıcılar</a>
+      <a href="payment.html">Pi &amp; Ödeme</a>
+      <a href="trust.html" class="active">Güven Sistemi</a>
+      <a href="members.html">Üyelik</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="login.html" class="btn">Giriş Yap</a>
+      <a href="members.html" class="btn btn-primary">Üye Ol</a>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <h1>Güven Sistemi</h1>
+  <p class="sub">
+    TradePi Global, üretici ve alıcı arasındaki ticareti; <strong>emanet hesabı</strong>, <strong>doğrulama süreçleri</strong> ve
+    <strong>uyuşmazlık yönetimi</strong> ile güvence altına almayı hedefler. Aşağıdaki model, gerçek sistem devreye alındığında temel alınacak akışı
+    şematik olarak gösterir.
+  </p>
+
+  <div class="grid">
+    <section class="card">
+      <div class="tag">1 • Emanet (Escrow) Modeli</div>
+      <h2>Ödeme, önce TradePi emanet hesabına alınır</h2>
+      <p>
+        Alıcı, sipariş için ödemeyi doğrudan üreticiye değil, TradePi’nin anlaşmalı emanet hesabına gönderir. Böylece ürün teslim edilmeden önce
+        ödeme güvende tutulur.
+      </p>
+      <ul>
+        <li>Alıcı ödemeyi kart / banka transferi ile emanet hesabına yapar.</li>
+        <li>Ödeme alındığında sipariş “Hazırlanıyor / Yolda” statüsüne geçer.</li>
+        <li>Üretici, panelinde ödemenin emanet hesabına düştüğünü görür.</li>
+      </ul>
+
+      <div class="tag" style="margin-top:12px;">2 • Teslimat ve Onay</div>
+      <h2>Ürün / hizmet teslimi, kayıt altına alınır</h2>
+      <p>
+        Lojistik belgeleri, teslim tutanakları ve gerekiyorsa fotoğraf / video kayıtları TradePi paneline yüklenir. Alıcı teslimatı panel üzerinden onaylar.
+      </p>
+      <ul>
+        <li>Teslimat bilgileri (irsaliye, CMR, konşimento vb.) sisteme eklenir.</li>
+        <li>Soğuk zincir ve hassas ürünlerde, sıcaklık / süre kayıtları tutulabilir.</li>
+        <li>Alıcı belirlenen süre içinde itiraz etmezse, sistem otomatik onay verir.</li>
+      </ul>
+
+      <div class="tag" style="margin-top:12px;">3 • Ödeme Çıkışı ve Komisyon</div>
+      <h2>Komisyon düşüldükten sonra üreticiye ödeme yapılır</h2>
+      <p>
+        Onaylanan siparişte, kategori ve hacme göre belirlenen komisyon oranı düşülür. Kalan tutar üreticinin kayıtlı banka hesabına aktarılır.
+      </p>
+      <ul>
+        <li>Küçük sipariş: örn. %5’e kadar komisyon.</li>
+        <li>Orta sipariş: örn. %3 civarı komisyon.</li>
+        <li>Büyük sipariş: hacim arttıkça düşen komisyon (örn. %1,5).</li>
+      </ul>
+
+      <p class="note">
+        Not: Bu sayfa demo amaçlıdır. Gerçek dünyada, lisanslı ödeme kuruluşu / banka iş ortakları ve yasal mevzuata tam uyum sağlandıktan sonra sistem aktifleştirilecektir.
+      </p>
+    </section>
+
+    <aside class="card">
+      <div class="tag">4 • Doğrulama ve Uyuşmazlık Yönetimi</div>
+      <h2>Üretici ve alıcıların güven profili</h2>
+      <p>
+        TradePi Global, platforma kabul edilen üretici ve alıcılar için temel doğrulama adımlarını uygular. Yüksek hacimli tedariklerde ek teminat
+        ve sözleşme süreçleri devreye alınır.
+      </p>
+      <ul>
+        <li>Şirket unvanı, vergi numarası ve iletişim bilgilerinin doğrulanması.</li>
+        <li>Referans siparişler ve teslimat geçmişine göre puanlama.</li>
+        <li>Riskli kategorilerde (gıda, kimya vb.) ek belge talebi.</li>
+      </ul>
+
+      <div class="tag" style="margin-top:12px;">Uyuşmazlık Akışı (Örnek)</div>
+      <div class="flow">
+        <div class="step">
+          <div class="step-no">1</div>
+          <div>
+            <strong>Alıcı itirazı başlatır</strong>
+            <span>Eksik, hasarlı veya spesifikasyona uymayan ürün için panelden detaylı itiraz açılır.</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-no">2</div>
+          <div>
+            <strong>İnceleme ve belge toplama</strong>
+            <span>Fatura, irsaliye, fotoğraf, video ve gerekiyorsa bağımsız ekspertiz raporu talep edilir.</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-no">3</div>
+          <div>
+            <strong>Çözüm önerisi</strong>
+            <span>Kısmi iade, yeniden sevkiyat veya karşılıklı mutabakat senaryoları taraflara sunulur.</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-no">4</div>
+          <div>
+            <strong>Ödeme kararı</strong>
+            <span>Emanet hesaptaki tutar, karar doğrultusunda üretici ve alıcı arasında paylaştırılır.</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="note">
+        Bu uyuşmazlık süreci, ülke hukukuna ve tarafların aralarında imzalayacağı çerçeve sözleşmelere göre şekillenecektir. TradePi Global
+        şu anda yalnızca konsept / demo aşamasındadır.
+      </p>
+    </aside>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-title">TradePi Global</div>
+        <p>
+          Dünya üreticilerini ve alıcılarını güvenli, hızlı ve şeffaf bir B2B ticaret altyapısında buluşturmayı hedefleyen platform (demo).
+        </p>
+      </div>
+      <div>
+        <div class="footer-title">Platform</div>
+        <ul class="footer-links">
+          <li><a href="producer.html">Üretici Avantajları</a></li>
+          <li><a href="buyer.html">Alıcı Avantajları</a></li>
+          <li><a href="trust.html">Güven Sistemi</a></li>
+          <li><a href="members.html">Üyelik Planları</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-title">Kurumsal</div>
+        <ul class="footer-links">
+          <li><a href="about.html">Hakkımızda</a></li>
+          <li><a href="mission.html">Misyon &amp; Vizyon</a></li>
+          <li><a href="privacy.html">Gizlilik &amp; KVKK</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-title">İletişim</div>
+        <ul class="footer-links">
+          <li><a href="mailto:support@tradepi.com">support@tradepi.com</a></li>
+          <li><a href="#">Türkiye Operasyon Ofisi (planlanıyor)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <span>© 2025 TradePi Global – Tüm hakları saklıdır. (Demo tasarım)</span>
+      <span style="font-size:10px;">Bu sayfa konsept / demo amaçlıdır, gerçek bir hukuki taahhüt içermez.</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
