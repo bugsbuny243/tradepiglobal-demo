@@ -1,24 +1,18 @@
 <!DOCTYPE html>
 <html lang="tr">
-  <head>
-<meta charset="UTF-8" />
-<title>TradePi Global...</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-
-<style>
-  :root {
-    --bg: #050816;
-    ...
+<head>
   <meta charset="UTF-8" />
   <title>TradePi Global – Pi Destekli B2B Ticaret Platformu (Demo)</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <style>
     :root {
       --bg: #050816;
       --bg-soft: #0b1020;
       --card: #101728;
+      --card-soft: #151c2f;
       --accent: #ffb83b;
-      --accent-soft: rgba(255, 184, 59, 0.15);
+      --accent-soft: rgba(255, 184, 59, 0.2);
       --accent-2: #4f46e5;
       --text: #f9fafb;
       --text-soft: #9ca3af;
@@ -34,8 +28,9 @@
     }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #111827 0, #020617 55%, #000 100%);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #020617 45%, #000 100%);
       color: var(--text);
       min-height: 100vh;
     }
@@ -45,64 +40,52 @@
       text-decoration: none;
     }
 
-    .container {
-      max-width: 1120px;
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: 1160px;
       margin: 0 auto;
-      padding: 0 16px;
+      padding: 16px 16px 32px;
     }
 
-    /* HEADER / LOGO */
-
-    header {
-      border-bottom: 1px solid rgba(148, 163, 184, 0.15);
-      backdrop-filter: blur(16px);
-      background: linear-gradient(to bottom, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.4));
-      position: sticky;
-      top: 0;
-      z-index: 20;
-    }
+    /* NAVBAR */
 
     .nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 0;
       gap: 16px;
+      padding: 12px 0 8px;
     }
 
-    .logo-wrap {
+    .brand {
       display: flex;
       align-items: center;
-      gap: 10px;
-    }
-
-    .logo-icon {
-      width: 34px;
-      height: 34px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 20%, #fef3c7, #f97316);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 16px;
-      color: #111827;
-      box-shadow: 0 0 30px rgba(248, 250, 252, 0.25);
-    }
-
-    .logo-text {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .logo-title {
-      font-weight: 700;
+      gap: 8px;
+      font-weight: 600;
       letter-spacing: 0.02em;
       font-size: 15px;
     }
 
-    .logo-subtitle {
+    .brand-logo {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      background: radial-gradient(circle at 30% 0, #f6c453, #e879f9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 14px;
+      box-shadow: 0 0 0 2px rgba(249, 250, 251, 0.08);
+    }
+
+    .brand-tag {
       font-size: 11px;
       color: var(--text-soft);
     }
@@ -110,670 +93,41 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 16px;
       font-size: 13px;
-    }
-
-    .nav-links a {
       color: var(--text-soft);
-      position: relative;
-      padding-bottom: 2px;
     }
 
     .nav-links a:hover {
       color: var(--text);
     }
 
-    .nav-links a.active::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 16px;
-      height: 2px;
-      border-radius: 999px;
-      background: linear-gradient(to right, var(--accent), var(--accent-2));
-    }
-
-    .nav-actions {
+    .nav-cta {
       display: flex;
-      gap: 10px;
       align-items: center;
+      gap: 8px;
     }
 
     .btn {
       border-radius: 999px;
-      border: 1px solid var(--border);
-      background: rgba(15, 23, 42, 0.7);
-      color: var(--text-soft);
-      font-size: 12px;
-      padding: 6px 12px;
-      cursor: pointer;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent-2), var(--accent));
-      border-color: transparent;
-      color: #020617;
-      font-weight: 600;
-      box-shadow: 0 10px 40px rgba(79, 70, 229, 0.5);
-    }
-
-    .btn-primary:hover {
-      filter: brightness(1.05);
-    }
-
-    .btn-outline {
-      background: transparent;
-    }
-
-    /* HERO */
-
-    .hero {
-      padding: 32px 0 24px;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
-      gap: 32px;
-      align-items: center;
-    }
-
-    .badge-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 16px;
-      font-size: 11px;
-      color: var(--text-soft);
-    }
-
-    .badge {
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      padding: 3px 10px;
-      background: rgba(15, 23, 42, 0.8);
-    }
-
-    .badge-pill {
-      border-radius: 999px;
-      background: rgba(16, 185, 129, 0.12);
-      color: #6ee7b7;
-      border: 1px solid rgba(52, 211, 153, 0.35);
-      padding: 2px 10px;
-      font-size: 11px;
-    }
-
-    .hero-title {
-      font-size: clamp(26px, 5vw, 32px);
-      line-height: 1.15;
-      margin-bottom: 12px;
-    }
-
-    .hero-title span.pi {
-      color: var(--pi);
-    }
-
-    .hero-sub {
-      font-size: 13px;
-      color: var(--text-soft);
-      max-width: 520px;
-      margin-bottom: 22px;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-
-    .hero-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      font-size: 11px;
-      color: var(--text-soft);
-    }
-
-    .hero-meta strong {
-      color: #e5e7eb;
-      font-weight: 600;
-    }
-
-    /* HERO SIDE PANEL */
-
-    .panel {
-      background: radial-gradient(circle at top left, rgba(248, 250, 252, 0.04), rgba(15, 23, 42, 0.95));
-      border-radius: 18px;
-      padding: 16px 18px;
-      border: 1px solid rgba(148, 163, 184, 0.3);
-      box-shadow: 0 18px 60px rgba(15, 23, 42, 0.9);
-      font-size: 11px;
-    }
-
-    .panel-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-
-    .panel-title {
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    .panel-tag {
-      font-size: 10px;
-      border-radius: 999px;
-      padding: 2px 8px;
-      background: rgba(34, 197, 94, 0.12);
-      color: #86efac;
-      border: 1px solid rgba(34, 197, 94, 0.4);
-    }
-
-    .panel-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px 18px;
-      margin-bottom: 12px;
-    }
-
-    .panel-label {
-      color: var(--text-soft);
-    }
-
-    .panel-value {
-      font-weight: 500;
-    }
-
-    .panel-pill {
-      font-size: 10px;
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px dashed rgba(148, 163, 184, 0.4);
-      color: var(--text-soft);
-    }
-
-    /* KATEGORİLER */
-
-    .section {
-      padding: 8px 0 24px;
-    }
-
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 14px;
-      gap: 12px;
-    }
-
-    .section-title {
-      font-size: 16px;
-      font-weight: 600;
-    }
-
-    .section-sub {
-      font-size: 12px;
-      color: var(--text-soft);
-    }
-
-    .chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 16px;
-    }
-
-    .chip {
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: rgba(15, 23, 42, 0.8);
-      padding: 5px 10px;
-      font-size: 11px;
-      color: var(--text-soft);
-      cursor: default;
-    }
-
-    .chip-primary {
-      background: var(--accent-soft);
-      color: #fbbf24;
-      border-color: rgba(234, 179, 8, 0.3);
-      font-weight: 500;
-    }
-
-    /* FEATURE CARDS */
-
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .card {
-      background: var(--card);
-      border-radius: 14px;
-      padding: 12px 12px 14px;
-      border: 1px solid var(--border);
-      font-size: 11px;
-    }
-
-    .card-label {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--text-soft);
-      margin-bottom: 4px;
-    }
-
-    .card-title {
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .card-text {
-      font-size: 11px;
-      color: var(--text-soft);
-      margin-bottom: 8px;
-    }
-
-    .card-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      border-radius: 999px;
-      padding: 4px 8px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px dashed rgba(148, 163, 184, 0.4);
-      color: var(--text-soft);
-      font-size: 10px;
-    }
-
-    .dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: #22c55e;
-    }
-
-    /* NEDEN TRADEPI / GÜVEN ÖZETİ */
-
-    .two-col {
-      display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2.3fr);
-      gap: 18px;
-      margin-top: 10px;
-    }
-
-    .list {
-      list-style: none;
-      display: grid;
-      gap: 6px;
-      margin-top: 8px;
-    }
-
-    .list li {
-      font-size: 11px;
-      color: var(--text-soft);
-      display: flex;
-      gap: 8px;
-    }
-
-    .list li::before {
-      content: "•";
-      color: var(--accent);
-      margin-top: 1px;
-    }
-
-    .trust-box {
-      background: radial-gradient(circle at top, rgba(248, 250, 252, 0.03), rgba(15, 23, 42, 0.98));
-      border-radius: 14px;
-      padding: 12px;
       border: 1px solid rgba(148, 163, 184, 0.4);
-      font-size: 11px;
-    }
-
-    .trust-tag {
-      font-size: 10px;
-      color: #93c5fd;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 4px;
-    }
-
-    .trust-link {
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 500;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      margin-top: 8px;
-      font-size: 11px;
-      color: #bfdbfe;
-    }
-
-    /* FOOTER */
-
-    footer {
-      border-top: 1px solid rgba(31, 41, 55, 0.9);
-      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), #020617);
-      margin-top: 26px;
-      padding: 20px 0 18px;
-      font-size: 11px;
-      color: var(--text-soft);
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1.6fr repeat(3, minmax(0, 1fr));
-      gap: 18px;
-      margin-bottom: 16px;
-    }
-
-    .footer-title {
-      font-size: 12px;
-      font-weight: 600;
-      margin-bottom: 6px;
-      color: #e5e7eb;
-    }
-
-    .footer-links {
-      list-style: none;
-      display: grid;
-      gap: 4px;
-    }
-
-    .footer-links a {
-      color: var(--text-soft);
-    }
-
-    .footer-links a:hover {
+      justify-content: center;
+      cursor: pointer;
+      background: transparent;
       color: var(--text);
     }
 
-    .footer-logo {
-      font-size: 12px;
-      font-weight: 600;
-      margin-bottom: 4px;
+    .btn-primary {
+      border: none;
+      background: linear-gradient(135deg, #f97316, #facc15);
+      color: #111827;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.8);
     }
 
-    .footer-copy {
-      border-top: 1px solid rgba(31, 41, 55, 0.8);
-      padding-top: 8px;
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    /* RESPONSIVE */
-
-    @media (max-width: 900px) {
-      .hero-grid,
-      .two-col,
-      .footer-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .hero {
-        padding-top: 20px;
-      }
-    }
-
-    @media (max-width: 720px) {
-      .nav {
-        flex-wrap: wrap;
-        align-items: flex-start;
-      }
-      .nav-links {
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        font-size: 12px;
-      }
-      .nav-actions {
-        margin-left: auto;
-      }
-      .grid-3 {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <div class="container nav">
-      <a href="index.html" class="logo-wrap">
-        <div class="logo-icon">TP</div>
-        <div class="logo-text">
-          <span class="logo-title">TradePi Global</span>
-          <span class="logo-subtitle">Pi destekli güvenli B2B ticaret</span>
-        </div>
-      </a>
-      <nav class="nav-links">
-        <a href="index.html" class="active">Nasıl Çalışır?</a>
-        <a href="producer.html">Üreticiler</a>
-        <a href="buyer.html">Alıcılar</a>
-        <a href="payment.html">Pi &amp; Ödeme</a>
-        <a href="trust.html">Güven Sistemi</a>
-        <a href="members.html">Üyelik</a>
-      </nav>
-      <div class="nav-actions">
-        <a href="login.html" class="btn btn-outline">Giriş Yap</a>
-        <a href="members.html" class="btn btn-primary">Üye Ol</a>
-      </div>
-    </div>
-  </header>
-
-  <main class="container">
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-grid">
-        <div>
-          <div class="badge-row">
-            <span class="badge">Demo hazır • Gerçek platform inşa ediliyor</span>
-            <span class="badge-pill">Pi destekli B2B ticaret</span>
-          </div>
-          <h1 class="hero-title">
-            Üretici ve alıcıyı <span class="pi">Pi</span> destekli, güvenli B2B ticarette buluşturuyoruz.
-          </h1>
-          <p class="hero-sub">
-            TradePi Global, fabrikalardan ve atölyelerden çıkan ürünleri, zincir marketler ve e-ticaret oyuncularına doğrudan ulaştıran
-            hibrit bir B2B platformudur. Ödeme USD/TL, isteğe bağlı Pi ile emanet modeli.
-          </p>
-
-          <div class="hero-actions">
-            <a href="producer.html" class="btn btn-primary">Üretici Olarak Ön Kayıt</a>
-            <a href="buyer.html" class="btn btn-outline">Alıcı / Zincir Market Başvurusu</a>
-          </div>
-
-          <div class="hero-meta">
-            <span><strong>Üyelik ücreti:</strong> Demo aşamasında 5 USD (planlanan)</span>
-            <span><strong>Komisyon:</strong> Kategoriye göre %2–%5</span>
-            <span><strong>Ödeme:</strong> USD/TL, ileride Pi entegrasyonu</span>
-          </div>
-        </div>
-
-        <aside class="panel">
-          <div class="panel-header">
-            <div>
-              <div class="panel-title">Örnek B2B İşlem – Gıda Toptan Sipariş</div>
-              <div style="font-size:10px;color:var(--text-soft);">Demo senaryo, gerçek ticari teklif değildir.</div>
-            </div>
-            <span class="panel-tag">Emanet aktif (demo)</span>
-          </div>
-
-          <div class="panel-grid">
-            <div class="panel-label">Alıcı</div>
-            <div class="panel-value">Global Market A.Ş.</div>
-
-            <div class="panel-label">Ürün</div>
-            <div class="panel-value">Organik Zeytinyağı 5L</div>
-
-            <div class="panel-label">Sipariş Tutarı</div>
-            <div class="panel-value">100.000 USD</div>
-
-            <div class="panel-label">Komisyon</div>
-            <div class="panel-value">‣ %3 (gıda / orta ölçek)</div>
-
-            <div class="panel-label">Ödeme Yöntemi</div>
-            <div class="panel-value">USD → Pi / USD dönüşümü (planlanan)</div>
-          </div>
-
-          <p style="font-size:10px;color:var(--text-soft);margin-bottom:8px;">
-            Alıcı ödemeyi önce TradePi emanet hesabına gönderir. Ürün teslim ve onaydan sonra, tutar üreticiye USD/TL olarak aktarılır.
-            Pi sadece güvenli ve hızlı ödeme kanalı olarak kullanılır (hedef model).
-          </p>
-
-          <div class="panel-pill">
-            <span class="dot"></span>
-            Emanet, komisyon ve banka süreçleri tamamlandığında otomatik akış devreye alınacaktır.
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <!-- KATEGORİLER + VİTRİN -->
-    <section class="section">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">Kategoriler ve örnek vitrin</h2>
-          <p class="section-sub">Üreticiler ürünlerini listeler, alıcılar filtreleyerek teklif veya numune talep eder.</p>
-        </div>
-      </div>
-
-      <div class="chip-row">
-        <span class="chip chip-primary">Tümü</span>
-        <span class="chip">Gıda &amp; Tarım</span>
-        <span class="chip">Tekstil &amp; Konfeksiyon</span>
-        <span class="chip">Sanayi ve Kimya</span>
-        <span class="chip">Soğuk Zincir &amp; Lojistik</span>
-        <span class="chip">OEM / Özel Marka</span>
-      </div>
-
-      <div class="grid-3">
-        <article class="card">
-          <div class="card-label">Gıda &amp; Tarım • Örnek ürün</div>
-          <h3 class="card-title">Organik Zeytinyağı 5L (Özel Marka)</h3>
-          <p class="card-text">
-            Menşe: Türkiye. Minimum 240 adet / palet. AB standartlarına uygun, ISO sertifikalı üretim. Zincir market private label için uygun.
-          </p>
-          <div class="card-pill">
-            <span class="dot"></span>
-            12.50 USD / adet • Komisyon hedefi: %3 (demo)
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card-label">Tekstil • Örnek ürün</div>
-          <h3 class="card-title">Pamuklu T-Shirt (OEM Üretim)</h3>
-          <p class="card-text">
-            Müşteriye özel baskı / etiket, farklı gramaj seçenekleri. Minimum 1.000 adet sipariş. Avrupa perakende zincirleri için ölçeklenebilir.
-          </p>
-          <div class="card-pill">
-            <span class="dot"></span>
-            3.10 USD / adet • Komisyon hedefi: %4 (demo)
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card-label">Soğuk Zincir &amp; Lojistik • Örnek hizmet</div>
-          <h3 class="card-title">Endüstriyel Temizlik ve Depo Hizmeti</h3>
-          <p class="card-text">
-            Avrupa ve MENA bölgesine yönelik, çok noktalı soğuk zincir depolama ve lojistik hizmeti. Talep bazlı fiyatlandırma.
-          </p>
-          <div class="card-pill">
-            <span class="dot"></span>
-            Teklif bazlı • Komisyon hedefi: %2 (demo)
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- NEDEN TRADEPI + GÜVEN ÖZETİ -->
-    <section class="section">
-      <div class="section-header">
-        <h2 class="section-title">Neden TradePi Global?</h2>
-      </div>
-
-      <div class="two-col">
-        <div>
-          <p class="section-sub">Üreticiler ve alıcılar için eşit, şeffaf ve izlenebilir bir tedarik modeli.</p>
-          <ul class="list">
-            <li>Üretici, ürününü aracı olmadan doğrudan kurumsal alıcıya sunar.</li>
-            <li>Alıcı, tek panelden onlarca üreticiden toplu teklif alır.</li>
-            <li>Kategoriye göre dinamik komisyon: Gıda, tekstil, sanayi vb. için farklı oranlar.</li>
-            <li>İleride aktif edilecek Pi entegrasyonu ile blokzincir tabanlı güvenli ödeme.</li>
-            <li>Emanet hesabı ile ürün teslim onayı olmadan üreticiye ödeme çıkmaz.</li>
-          </ul>
-        </div>
-
-        <aside class="trust-box">
-          <div class="trust-tag">Güven Sistemi – Özet</div>
-          <h3 style="font-size:13px;margin-bottom:6px;">Emanet, doğrulama ve uyuşmazlık yönetimi</h3>
-          <p style="margin-bottom:6px;">
-            TradePi Global, ileride devreye alınacak sistemde tüm ödemeleri önce emanet hesabına alır. Ürün teslimi ve kalite onayı sonrası,
-            komisyon düşülerek üreticiye aktarım yapılır.
-          </p>
-          <p style="margin-bottom:6px;">
-            Üretici ve alıcılar, <strong>KYC / şirket doğrulama</strong> süreçlerinden geçer. Yüksek hacimli siparişlerde ek sözleşme ve teminat
-            katmanları uygulanır.
-          </p>
-          <a href="trust.html" class="trust-link">
-            Güven Sistemi sayfasını ayrıntılı incele &rarr;
-          </a>
-        </aside>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <div class="footer-logo">TradePi Global</div>
-          <p style="font-size:11px;">
-            Dünya üreticileri ile zincir marketler, toptancılar ve e-ticaret oyuncularını bir araya getiren, Pi destekli hibrit B2B ticaret
-            platformu (demo sürüm).
-          </p>
-        </div>
-
-        <div>
-          <div class="footer-title">Platform</div>
-          <ul class="footer-links">
-            <li><a href="producer.html">Üretici Avantajları</a></li>
-            <li><a href="buyer.html">Alıcı Avantajları</a></li>
-            <li><a href="trust.html">Güven Sistemi</a></li>
-            <li><a href="members.html">Üyelik Planları</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <div class="footer-title">Kurumsal</div>
-          <ul class="footer-links">
-            <li><a href="about.html">Hakkımızda</a></li>
-            <li><a href="mission.html">Misyon &amp; Vizyon</a></li>
-            <li><a href="global-sourcing.html">Global Tedarik İlkeleri</a></li>
-            <li><a href="privacy.html">Gizlilik &amp; KVKK</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <div class="footer-title">İletişim</div>
-          <ul class="footer-links">
-            <li><a href="mailto:support@tradepi.com">E-posta: support@tradepi.com</a></li>
-            <li><a href="mailto:info@tradepi.com">Genel Bilgi: info@tradepi.com</a></li>
-            <li><a href="#">Türkiye Operasyon Ofisi (yakında)</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="footer-copy">
-        <span>© 2025 TradePi Global – Tüm hakları saklıdır. (Demo tasarım)</span>
-        <span style="font-size:10px;">Bu site demo amaçlıdır, gerçek bir ödeme veya teklif altyapısı içermez.</span>
-      </div>
-    </div>
-  </footer>
-</body>
-  </html>
+    .btn-primary:hover {
+      filter: brightness(1.05
